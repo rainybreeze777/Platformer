@@ -7,6 +7,8 @@ public class PhysicsObject : MonoBehaviour
   public float minGroundNormalY = .65f;
   public float gravityModifier;
 
+  public float debugRayLength = 1f;
+
   protected Vector2 targetVelocity;
   protected bool grounded;
   protected Vector2 groundNormal;
@@ -50,10 +52,16 @@ public class PhysicsObject : MonoBehaviour
     Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
 
     Vector2 move = moveAlongGround * deltaPosition.x;
+    Debug.DrawRay(gameObject.transform.position
+                  , new Vector3(move.x, move.y, 0) * debugRayLength
+                  , Color.red);
 
     Movement(move, false);
 
     move = Vector2.up * deltaPosition.y;
+    Debug.DrawRay(gameObject.transform.position
+                  , new Vector3(move.x, move.y, 0) * debugRayLength
+                  , Color.green);
 
     Movement(move, true);
   }
@@ -62,25 +70,29 @@ public class PhysicsObject : MonoBehaviour
     float distance = move.magnitude;
 
     if (distance > minMoveDistance) {
-      int count = rb2d.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+      int count = rb2d.Cast(move, contactFilter, hitBuffer
+                            , distance + shellRadius);
       actualHitList.Clear();
 
       // Figure out if object actually hit something
       for (int i = 0; i < count; i++) {
-        PlatformEffector2D effector = hitBuffer[i].collider.GetComponent<PlatformEffector2D>();
+        Debug.DrawRay(hitBuffer[i].point, hitBuffer[i].normal);
+        PlatformEffector2D effector = hitBuffer[i].collider
+                                        .GetComponent<PlatformEffector2D>();
         if (effector && effector.useOneWay) {
-          
+          Vector2 hitNormal = hitBuffer[i].normal;
+          // TODO: Why does checking move here works, but checking velocity fails?
+          if (Vector2.Dot(move, hitNormal) > 0
+              || !EffectorHelpers.IsTopEffective(effector, hitNormal)) {
+            Debug.LogWarning("PlatformEffector2D is skipping!");
+            continue; 
+          }
         }
         actualHitList.Add(hitBuffer[i]);
       }
 
       for (int i = 0; i < actualHitList.Count; i++) {
         var hit = actualHitList[i];
-
-        bool output = hit.transform.name == "LowerEdge";
-        if (output) {
-          Debug.Log("HIT");
-        }
 
         Vector2 currentNormal = hit.normal;
         if (currentNormal.y > minGroundNormalY) {
@@ -93,9 +105,6 @@ public class PhysicsObject : MonoBehaviour
 
         float projection = Vector2.Dot(velocity, currentNormal);
         if (projection < 0) {
-          if (output) {
-            Debug.LogWarning(System.String.Format("Projection: {0}", projection));
-          }
           velocity = velocity - projection * currentNormal;
         }
 
