@@ -8,6 +8,7 @@ public class PlayerPlatformerController : PhysicsObject {
   public float jumpTakeOffSpeed = 7;
 
   private bool isClimbing = false;
+  private bool isDucking = false;
 
   private SpriteRenderer spriteRenderer;
   // private Animator animator;
@@ -29,6 +30,8 @@ public class PlayerPlatformerController : PhysicsObject {
       velocity = Vector2.zero;
     } else if (Input.GetButtonDown("Jump") && grounded) {
       velocity.y = jumpTakeOffSpeed;
+    } else if (Input.GetButton("Duck") && grounded) {
+      isDucking = true;
     } else if (Input.GetButtonUp("Jump")) {
       if (velocity.y > 0) {
         velocity.y = velocity.y * 0.5f;
@@ -60,5 +63,9 @@ public class PlayerPlatformerController : PhysicsObject {
       rb2d.gravityScale = 1;
       gravityModifier = settedGravityModifier;
     }
+  }
+
+  bool IsDucking {
+    get { return isDucking; }
   }
 }
