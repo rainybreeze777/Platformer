@@ -7,6 +7,8 @@ public class PlayerPlatformerController : PhysicsObject {
   public float maxSpeed = 7;
   public float jumpTakeOffSpeed = 7;
 
+  public EventManager m_EventManager;
+
   private bool isClimbing = false;
   private bool isDucking = false;
 
@@ -29,13 +31,25 @@ public class PlayerPlatformerController : PhysicsObject {
     } else if (Input.GetButtonUp("Vertical") && isClimbing) {
       velocity = Vector2.zero;
     } else if (Input.GetButtonDown("Jump") && grounded) {
-      velocity.y = jumpTakeOffSpeed;
-    } else if (Input.GetButton("Duck") && grounded) {
-      isDucking = true;
+      if (!isDucking) {
+        velocity.y = jumpTakeOffSpeed;
+      }
+      m_EventManager.Invoke<JumpUEvent>();
     } else if (Input.GetButtonUp("Jump")) {
       if (velocity.y > 0) {
         velocity.y = velocity.y * 0.5f;
       }
+      m_EventManager.Invoke<JumpReleaseUEvent>();
+    }
+
+    if (Input.GetButton("Duck") && grounded) {
+      if (!isDucking) {
+        m_EventManager.Invoke<DuckingUEvent, bool>(true);
+      }
+      isDucking = true;
+    } else if (grounded && isDucking) {
+      m_EventManager.Invoke<DuckingUEvent, bool>(false);
+      isDucking = false;
     }
 
     bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < 0.01f));
