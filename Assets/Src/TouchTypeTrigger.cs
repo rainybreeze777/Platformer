@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TouchTypeTrigger : MonoBehaviour
 {
+  public List<Triggerable> m_TriggerTargets;
+
   private Animator m_Anim;
-  // Start is called before the first frame update
+
   void Start()
   {
     m_Anim = GetComponent<Animator>();
@@ -13,9 +15,15 @@ public class TouchTypeTrigger : MonoBehaviour
 
   void OnTriggerEnter2D(Collider2D collider) {
     m_Anim.SetBool("isTriggered", true);
+    foreach (var t in m_TriggerTargets) {
+      t.NotifyTriggerEnter();
+    }
   }
 
   void OnTriggerExit2D(Collider2D collider) {
     m_Anim.SetBool("isTriggered", false);
+    foreach (var t in m_TriggerTargets) {
+      t.NotifyTriggerExit();
+    }
   }
 }
