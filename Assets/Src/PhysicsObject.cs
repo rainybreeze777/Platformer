@@ -47,6 +47,8 @@ public class PhysicsObject : MonoBehaviour
 
     grounded = false;
 
+    var extraMoving = new List<SelfMovableObject>();
+
     Vector2 deltaPosition = velocity * Time.deltaTime;
 
     Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
@@ -60,17 +62,22 @@ public class PhysicsObject : MonoBehaviour
                   , new Vector3(move.x, move.y, 0) * debugRayLength
                   , Color.red);
 
-    Movement(move, false);
+    Movement(move, false, extraMoving);
 
     move = Vector2.up * deltaPosition.y;
     Debug.DrawRay(gameObject.transform.position
                   , new Vector3(move.x, move.y, 0) * debugRayLength
                   , Color.green);
 
-    Movement(move, true);
+    Movement(move, true, extraMoving);
+    Vector2 externalVelocities = Vector2.zero;
+    foreach (SelfMovableObject movingObj in extraMoving) {
+      externalVelocities += movingObj.Velocity;
+    }
+    rb2d.position += externalVelocities * Time.deltaTime;
   }
 
-  void Movement(Vector2 move, bool yMovement) {
+  void Movement(Vector2 move, bool yMovement, List<SelfMovableObject> additionalObjects) {
     float distance = move.magnitude;
 
     if (distance > minMoveDistance) {
@@ -110,6 +117,9 @@ public class PhysicsObject : MonoBehaviour
         float projection = Vector2.Dot(velocity, currentNormal);
         if (projection < 0) {
           velocity = velocity - projection * currentNormal;
+        }
+        if (hit.transform.tag == "SelfMovable") {
+          additionalObjects.Add(hit.transform.GetComponent<SelfMovableObject>());
         }
 
         float modifiedDistance = hit.distance - shellRadius;
