@@ -95,7 +95,6 @@ public class PhysicsObject : MonoBehaviour
           // TODO: Why does checking move here works, but checking velocity fails?
           if (Vector2.Dot(move, hitNormal) > -0.000001
               || !EffectorHelpers.IsTopEffective(effector, hitNormal)) {
-            Debug.LogWarning("PlatformEffector2D is skipping!");
             continue; 
           }
         }
