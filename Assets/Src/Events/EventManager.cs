@@ -17,6 +17,8 @@ public class EventManager : MonoBehaviour {
     m_UEventsDict.Add(typeof(DuckingUEvent), m_DuckingUEvent);
     m_UEventsDict.Add(typeof(JumpUEvent), m_JumpUEvent);
     m_UEventsDict.Add(typeof(JumpReleaseUEvent), m_JumpReleaseUEvent);
+    m_UEventsDict.Add(typeof(ObtainItemUEvent), new ObtainItemUEvent());
+    m_UEventsDict.Add(typeof(SpendItemUEvent), new SpendItemUEvent());
   }
 
   public bool Invoke<UE0>()
@@ -24,6 +26,7 @@ public class EventManager : MonoBehaviour {
   {
     UnityEventBase ue;
     bool res = m_UEventsDict.TryGetValue(typeof(UE0), out ue);
+    Debug.Assert(res, "Event " + typeof(UE0) + " is not found! Did you forget to add it to m_UEventsDict in EventManager Awake() ?");
     if (res) {
       ((UE0) ue).Invoke();
     }
@@ -35,6 +38,7 @@ public class EventManager : MonoBehaviour {
   {
     UnityEventBase ue;
     bool res = m_UEventsDict.TryGetValue(typeof(UE1), out ue);
+    Debug.Assert(res, "Event " + typeof(UE1) + " is not found! Did you forget to add it to m_UEventsDict in EventManager Awake() ?");
     if (res)
     {
       ((UE1)ue).Invoke(p);
@@ -47,6 +51,7 @@ public class EventManager : MonoBehaviour {
   {
     UnityEventBase ue;
     bool res = m_UEventsDict.TryGetValue(typeof(UE2), out ue);
+    Debug.Assert(res, "Event " + typeof(UE2) + " is not found! Did you forget to add it to m_UEventsDict in EventManager Awake() ?");
     if (res)
     {
       ((UE2)ue).Invoke(p1, p2);
@@ -59,6 +64,7 @@ public class EventManager : MonoBehaviour {
   {
     UnityEventBase ue;
     bool res = m_UEventsDict.TryGetValue(typeof(UE3), out ue);
+    Debug.Assert(res, "Event " + typeof(UE3) + " is not found! Did you forget to add it to m_UEventsDict in EventManager Awake() ?");
     if (res)
     {
       ((UE3)ue).Invoke(p1, p2, p3);
@@ -71,6 +77,7 @@ public class EventManager : MonoBehaviour {
   {
     UnityEventBase ue;
     bool res = m_UEventsDict.TryGetValue(typeof(UE4), out ue);
+    Debug.Assert(res, "Event " + typeof(UE4) + " is not found! Did you forget to add it to m_UEventsDict in EventManager Awake() ?");
     if (res)
     {
       ((UE4)ue).Invoke(p1, p2, p3, p4);
