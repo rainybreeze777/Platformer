@@ -1,6 +1,4 @@
-﻿#pragma warning disable 0436 // InvtItem has a duplicate name in C#
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
