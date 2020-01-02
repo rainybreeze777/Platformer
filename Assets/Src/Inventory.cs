@@ -25,15 +25,21 @@ public class Inventory {
     return false;
   }
 
-  public bool TakeOutItemById(string id) {
-
+  public InvtItem TakeOutItemById(string id) {
     for (int i = 0; i < m_Items.Count; ++i) {
       if (m_Items[i].Id == id) {
+        InvtItem ret = m_Items[i];
         m_Items.RemoveAt(i);
-        return true;
+        return ret;
       }
     }
+    return null;
+  }
 
-    return false;
+  public InvtItem GetItemById(string id) {
+    foreach (var item in m_Items) {
+      if (item.Id == id) { return item; }
+    }
+    return null;
   }
 }
