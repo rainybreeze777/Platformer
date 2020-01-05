@@ -9,8 +9,8 @@ public class SelfMovableObject : Triggerable
   public bool m_OneTimeTrigger = true;
   public bool m_Loop = false;
   public EDirection m_InitialDirection = EDirection.Positive;
-  public Vector2 m_Pos1;
-  public Vector2 m_Pos2;
+  public Vector2 m_LocalPos1;
+  public Vector2 m_LocalPos2;
   [Range(0, 1)]
   public float m_StartingPos;
   public float m_Speed;
@@ -19,12 +19,17 @@ public class SelfMovableObject : Triggerable
   private float m_Dist;
   private int m_CurrentDirection;
   private float m_T;
+  private Vector2 m_Pos1;
+  private Vector2 m_Pos2;
   private Vector2 m_Velocity;
   private Rigidbody2D m_Rb2d;
 
   // Start is called before the first frame update
   void Start() {
     m_Rb2d = GetComponent<Rigidbody2D>();
+    // Convert position in parent space to world position
+    m_Pos1 = transform.parent.TransformPoint(m_LocalPos1);
+    m_Pos2 = transform.parent.TransformPoint(m_LocalPos2);
     m_Dist = Vector2.Distance(m_Pos1, m_Pos2);
     m_CurrentDirection = m_InitialDirection == EDirection.Positive ? 1 : -1;
     m_T = m_StartingPos;
@@ -32,7 +37,6 @@ public class SelfMovableObject : Triggerable
     Debug.Assert(tag == "SelfMovable", name + " object is self movable, but does not have tag SelfMovable!");
   }
 
-  // Update is called once per frame
   void FixedUpdate() {
     if (!Application.IsPlaying(gameObject)) {
       m_Rb2d.position = Vector2.Lerp(m_Pos1, m_Pos2, m_StartingPos);
