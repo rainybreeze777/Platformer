@@ -37,11 +37,14 @@ public class SelfMovableObject : Triggerable
     Debug.Assert(tag == "SelfMovable", name + " object is self movable, but does not have tag SelfMovable!");
   }
 
-  void FixedUpdate() {
+  void Update() {
     if (!Application.IsPlaying(gameObject)) {
-      m_Rb2d.position = Vector2.Lerp(m_Pos1, m_Pos2, m_StartingPos);
+      transform.position = Vector2.Lerp(m_Pos1, m_Pos2, m_StartingPos);
       return;
     }
+  }
+
+  void FixedUpdate() {
     if (m_ShouldMove) {
       float prevT = m_T;
       m_T += (Time.deltaTime * m_Speed / m_Dist) * m_CurrentDirection;

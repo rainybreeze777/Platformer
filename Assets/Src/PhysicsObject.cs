@@ -40,6 +40,10 @@ public class PhysicsObject : MonoBehaviour
   }
 
   protected virtual void ComputeVelocity() {}
+  protected virtual void FallDistance(float distance) {}
+  protected virtual void Landed() {}
+
+  private bool m_PrevGrounded = true;
 
   void FixedUpdate() {
     velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
@@ -75,6 +79,11 @@ public class PhysicsObject : MonoBehaviour
       externalVelocities += movingObj.Velocity;
     }
     rb2d.position += externalVelocities * Time.deltaTime;
+
+    if (grounded && !m_PrevGrounded) {
+      Landed();
+    }
+    m_PrevGrounded = grounded;
   }
 
   void Movement(Vector2 move, bool yMovement, List<SelfMovableObject> additionalObjects) {
@@ -123,6 +132,11 @@ public class PhysicsObject : MonoBehaviour
 
         float modifiedDistance = hit.distance - shellRadius;
         distance = modifiedDistance < distance ? modifiedDistance : distance;
+      }
+
+      if (yMovement && !grounded && Vector2.Dot(move, Vector2.down) > -0.000001)
+      {
+        FallDistance(distance);
       }
     }
 
