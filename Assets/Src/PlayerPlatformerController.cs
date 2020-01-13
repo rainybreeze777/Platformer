@@ -1,24 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// Hide Unity Input class as we want to have more convenient control
+using Input = Platformer.Input;
 
 public class PlayerPlatformerController : PhysicsObject {
 
   public float maxSpeed = 7;
   public float jumpTakeOffSpeed = 7;
 
+  public float m_FallDeathThreshold = 10f;
+
   public EventManager m_EventManager;
+  public PlayerManager m_PlayerManager;
+
+  public bool m_SpawnAtSpawnPoint = true;
 
   private bool isClimbing = false;
   private bool isDucking = false;
+  private float m_FallDist = 0;
 
   private SpriteRenderer spriteRenderer;
-  // private Animator animator;
+  private Animator m_Animator;
 
   // Use this for initialization
   void Awake() {
     spriteRenderer = GetComponent<SpriteRenderer>();
-    // animator = GetComponent<Animator>();
+    m_Animator = GetComponent<Animator>();
   }
 
   protected override void ComputeVelocity() {
@@ -63,6 +71,18 @@ public class PlayerPlatformerController : PhysicsObject {
     targetVelocity = move * maxSpeed;
   }
 
+  protected override void FallDistance(float distance) {
+    m_FallDist += distance;
+  }
+
+  protected override void Landed() {
+    if (m_FallDist > m_FallDeathThreshold) {
+      m_Animator.SetTrigger("Die");
+      m_PlayerManager.Die();
+    }
+    m_FallDist = 0; 
+  }
+
   void OnTriggerEnter2D(Collider2D c) {
       if (c.transform.tag == "Climbable" && Input.GetButton("Jump")) {
           isClimbing = true;
@@ -79,7 +99,13 @@ public class PlayerPlatformerController : PhysicsObject {
     }
   }
 
+  void OnDeathAnimationFinish() {
+    m_PlayerManager.CompletelyDead();
+  }
+
   bool IsDucking {
     get { return isDucking; }
   }
+
+  public bool SpawnAtSpawnPoint { get { return m_SpawnAtSpawnPoint; } }
 }
