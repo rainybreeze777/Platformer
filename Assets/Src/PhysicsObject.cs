@@ -51,6 +51,10 @@ public class PhysicsObject : MonoBehaviour
 
     Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
 
+    Debug.DrawRay(gameObject.transform.position
+                  , new Vector3(moveAlongGround.x, moveAlongGround.y, 0)
+                  , Color.cyan);
+
     Vector2 move = moveAlongGround * deltaPosition.x;
     Debug.DrawRay(gameObject.transform.position
                   , new Vector3(move.x, move.y, 0) * debugRayLength
@@ -82,7 +86,7 @@ public class PhysicsObject : MonoBehaviour
         if (effector && effector.useOneWay) {
           Vector2 hitNormal = hitBuffer[i].normal;
           // TODO: Why does checking move here works, but checking velocity fails?
-          if (Vector2.Dot(move, hitNormal) > 0
+          if (Vector2.Dot(move, hitNormal) > -0.000001
               || !EffectorHelpers.IsTopEffective(effector, hitNormal)) {
             Debug.LogWarning("PlatformEffector2D is skipping!");
             continue; 
