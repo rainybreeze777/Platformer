@@ -5,8 +5,8 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class UIInventoryListener : MonoBehaviour {
-  
-  public EventManager m_EventManager;
+
+  private EventManager m_EventManager;
   // For Callbacks, watch out for thread synchronization
   // TODO: Get a lock maybe? Or a queue of some kind, to avoid
   // overwrites
@@ -21,6 +21,8 @@ public class UIInventoryListener : MonoBehaviour {
   }
 
   void Start() {
+    m_EventManager = GameObject.Find("/EventManager")
+                           .GetComponent<EventManager>() as EventManager;
     m_EventManager.AddListener<ObtainItemUEvent, InvtItem>(OnObtainItem);
     m_EventManager.AddListener<SpendItemUEvent, InvtItem>(OnSpendingItem);
   }

@@ -6,24 +6,36 @@ using Input = Platformer.Input;
 
 public class PlayerManager : MonoBehaviour
 {
-  public EventManager m_EventManager;
-  public PlayerPlatformerController m_PlayerChar;
-  public Transform m_SpawnPoint;
+  // Since This object will not get destroyed upon unload, references
+  // can be dragged in via inspector
+  private EventManager m_EventManager;
+  private PlayerPlatformerController m_PlayerChar;
+  private Transform m_SpawnPoint;
 
   private Inventory m_Inventory;
-  private bool m_IsDead;
 
-  private static bool s_Registered = false;
+  private static PlayerManager s_Instance;
 
   void Awake() {
-    m_Inventory = new Inventory();
-    if (!s_Registered) {
-      SceneManager.sceneLoaded += OnSceneLoaded;
+    if (s_Instance == null) {
+      s_Instance = this;
+    } else {
+      Destroy(this.gameObject);
     }
-    s_Registered = true;
+    DontDestroyOnLoad(this.gameObject);
+
+    m_Inventory = new Inventory();
   }
 
   void Start() {
+    m_PlayerChar = GameObject
+                    .FindWithTag("Player")
+                    .GetComponent<PlayerPlatformerController>() 
+                      as PlayerPlatformerController;
+    m_EventManager = GameObject.Find("/EventManager")
+                           .GetComponent<EventManager>() as EventManager;
+    m_EventManager.AddListener<PlayerSpawnedUEvent>(OnSpawn);
+    m_EventManager.AddListener<AboutToDieUEvent>(AboutToDie);
     if (m_PlayerChar.SpawnAtSpawnPoint) {
       m_PlayerChar.transform.position = m_SpawnPoint.position;
     }
@@ -52,20 +64,12 @@ public class PlayerManager : MonoBehaviour
     return m_Inventory.HasItemById(id);
   }
 
-  public void Die() {
-    if (!m_IsDead) {
-      Debug.Log("You Died");
-      Input.AllowInput = false;
-      m_IsDead = true;
-    }
+  private void AboutToDie() {
+    Debug.Log("You Died");
+    Input.AllowInput = false;
   }
 
-  public void CompletelyDead() {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-  }
-
-  private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-    m_IsDead = false;
+  private void OnSpawn() {
     Input.AllowInput = true;
   }
 }

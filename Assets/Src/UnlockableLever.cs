@@ -8,12 +8,14 @@ public class UnlockableLever : MonoBehaviour, IUnlockable {
   public bool m_AutoReset = false;
   public float m_AutoResetWaitTime = 0;
   public List<Toggleable> m_ToggleTargets;
-  public PlayerManager m_PlayerManager;
+  private PlayerManager m_PlayerManager;
   private bool m_IsLocked = true;
   private Animator m_Animator;
   
   // Start is called before the first frame update
   void Start() {
+    m_PlayerManager = GameObject.Find("/PlayerManager")
+                           .GetComponent<PlayerManager>() as PlayerManager;
     m_Animator = GetComponent<Animator>();
   }
 
