@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,7 @@ public class PlayerManager : MonoBehaviour
   // can be dragged in via inspector
   private EventManager m_EventManager;
   private PlayerPlatformerController m_PlayerChar;
-  private Transform m_SpawnPoint;
+  private SpawnPoint[] m_SpawnPoints;
 
   private Inventory m_Inventory;
 
@@ -36,8 +37,24 @@ public class PlayerManager : MonoBehaviour
                            .GetComponent<EventManager>() as EventManager;
     m_EventManager.AddListener<PlayerSpawnedUEvent>(OnSpawn);
     m_EventManager.AddListener<AboutToDieUEvent>(AboutToDie);
+
+    GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
+    m_SpawnPoints = new SpawnPoint[spawnPoints.Length];
+    foreach (GameObject gObj in spawnPoints)
+    {
+      SpawnPoint point = gObj.GetComponent<SpawnPoint>() as SpawnPoint;
+      if (point.SpawnIndex >= m_SpawnPoints.Length) {
+        point.ThrowIndexOutOfRangeException(m_SpawnPoints.Length);
+      }
+      if (m_SpawnPoints[point.SpawnIndex] != null) {
+        point.ThrowDuplicateSpawnPointsException();
+        continue;
+      }
+      m_SpawnPoints[point.SpawnIndex] = point;
+    }
+
     if (m_PlayerChar.SpawnAtSpawnPoint) {
-      m_PlayerChar.transform.position = m_SpawnPoint.position;
+      m_PlayerChar.transform.position = m_SpawnPoints[0].transform.position;
     }
   }
 
