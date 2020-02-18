@@ -373,6 +373,16 @@ PrefabInstance:
       propertyPath: m_EventManager
       value: 
       objectReference: {fileID: 317883167}
+    - target: {fileID: 7082627658993311031, guid: 9f0e48fc2ebb09745a5b772ef565f40d,
+        type: 3}
+      propertyPath: m_SaveFilename
+      value: save.json
+      objectReference: {fileID: 0}
+    - target: {fileID: 7082627658993311031, guid: 9f0e48fc2ebb09745a5b772ef565f40d,
+        type: 3}
+      propertyPath: m_ShouldSave
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f0e48fc2ebb09745a5b772ef565f40d, type: 3}
 --- !u!1 &1189236208

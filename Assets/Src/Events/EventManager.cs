@@ -19,6 +19,7 @@ public class EventManager : MonoBehaviour {
       s_RegisteredEvents = new HashSet<IntPtr>();
     } else {
       Destroy(this.gameObject);
+      return;
     }
     DontDestroyOnLoad(this.gameObject);
 

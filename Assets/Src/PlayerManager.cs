@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
       s_Instance = this;
     } else {
       Destroy(this.gameObject);
+      return;
     }
     DontDestroyOnLoad(this.gameObject);
 
@@ -37,25 +38,7 @@ public class PlayerManager : MonoBehaviour
                            .GetComponent<EventManager>() as EventManager;
     m_EventManager.AddListener<PlayerSpawnedUEvent>(OnSpawn);
     m_EventManager.AddListener<AboutToDieUEvent>(AboutToDie);
-
-    GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
-    m_SpawnPoints = new SpawnPoint[spawnPoints.Length];
-    foreach (GameObject gObj in spawnPoints)
-    {
-      SpawnPoint point = gObj.GetComponent<SpawnPoint>() as SpawnPoint;
-      if (point.SpawnIndex >= m_SpawnPoints.Length) {
-        point.ThrowIndexOutOfRangeException(m_SpawnPoints.Length);
-      }
-      if (m_SpawnPoints[point.SpawnIndex] != null) {
-        point.ThrowDuplicateSpawnPointsException();
-        continue;
-      }
-      m_SpawnPoints[point.SpawnIndex] = point;
-    }
-
-    if (m_PlayerChar.SpawnAtSpawnPoint) {
-      m_PlayerChar.transform.position = m_SpawnPoints[0].transform.position;
-    }
+    InitSpawnPoints();
   }
 
   public void ObtainItem(InvtItem item) {
@@ -87,6 +70,31 @@ public class PlayerManager : MonoBehaviour
   }
 
   private void OnSpawn() {
+    InitSpawnPoints();
     Input.AllowInput = true;
+  }
+
+  private void InitSpawnPoints()
+  {
+    GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
+    m_SpawnPoints = new SpawnPoint[spawnPoints.Length];
+    foreach (GameObject gObj in spawnPoints)
+    {
+      SpawnPoint point = gObj.GetComponent<SpawnPoint>() as SpawnPoint;
+      if (point.SpawnIndex >= m_SpawnPoints.Length)
+      {
+        point.ThrowIndexOutOfRangeException(m_SpawnPoints.Length);
+      }
+      if (m_SpawnPoints[point.SpawnIndex] != null)
+      {
+        point.ThrowDuplicateSpawnPointsException();
+        continue;
+      }
+      m_SpawnPoints[point.SpawnIndex] = point;
+    }
+
+    if (m_PlayerChar.SpawnAtSpawnPoint) {
+      m_PlayerChar.transform.position = m_SpawnPoints[0].transform.position;
+    }
   }
 }
