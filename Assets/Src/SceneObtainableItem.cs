@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class SceneObtainableItem : MonoBehaviour
 {
   public InvtItem m_Item;

@@ -35,6 +35,8 @@ public class EventManager : MonoBehaviour {
     m_UEventsDict.Add(typeof(PlayerSpawnedUEvent), new PlayerSpawnedUEvent());
     m_UEventsDict.Add(typeof(ObtainItemUEvent), new ObtainItemUEvent());
     m_UEventsDict.Add(typeof(SpendItemUEvent), new SpendItemUEvent());
+    m_UEventsDict.Add(typeof(TransitionNextSceneUEvent)
+                      , new TransitionNextSceneUEvent());
   }
 
   public bool Invoke<UE0>()

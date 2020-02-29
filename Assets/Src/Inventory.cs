@@ -42,4 +42,18 @@ public class Inventory {
     }
     return null;
   }
+
+  public List<InvtItem> AllItems { get { return m_Items; } }
+
+  /// <summary>
+  ///   Creates a new list of shallow cloned InvtItems.
+  ///   Is this acceptable? Should the InvtItem be deep cloned as well?
+  /// </summary>
+  public Inventory Clone() {
+    var ret = new Inventory();
+    foreach(var item in m_Items) {
+      ret.PutInItem(item.ShallowCopy());
+    }
+    return ret;
+  }
 }

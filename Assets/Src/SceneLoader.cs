@@ -44,6 +44,7 @@ public class SceneLoader : MonoBehaviour
 
   void Start() {
     m_EventManager.AddListener<DeadUEvent>(RestartScene);
+    m_EventManager.AddListener<TransitionNextSceneUEvent>(LoadNextScene);
   }
 
   public void LoadNextScene() {

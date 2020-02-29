@@ -9,11 +9,14 @@ public class InvtItem
   [SerializeField] private string m_ItemId;
   [SerializeField] private Sprite m_InventorySprite;
 
-  public InvtItem(string name, string id, Sprite renderer)
-  {
+  public InvtItem(string name, string id, Sprite renderer) {
     m_Name = name;
     m_ItemId = id;
     m_InventorySprite = renderer;
+  }
+
+  public InvtItem ShallowCopy() {
+    return this.MemberwiseClone() as InvtItem;
   }
 
   public string Name { get { return m_Name; } }

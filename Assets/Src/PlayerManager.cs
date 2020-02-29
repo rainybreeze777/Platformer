@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
   private SpawnPoint[] m_SpawnPoints;
 
   private Inventory m_Inventory;
+  private Inventory m_LevelStartInventory;
 
   private static PlayerManager s_Instance;
 
@@ -38,6 +39,8 @@ public class PlayerManager : MonoBehaviour
                            .GetComponent<EventManager>() as EventManager;
     m_EventManager.AddListener<PlayerSpawnedUEvent>(OnSpawn);
     m_EventManager.AddListener<AboutToDieUEvent>(AboutToDie);
+    m_EventManager.AddListener<TransitionNextSceneUEvent>(SaveInventory);
+    m_LevelStartInventory = m_Inventory.Clone();
     InitSpawnPoints();
   }
 
@@ -64,6 +67,8 @@ public class PlayerManager : MonoBehaviour
     return m_Inventory.HasItemById(id);
   }
 
+  public List<InvtItem> AllItems { get { return m_Inventory.AllItems; } }
+
   private void AboutToDie() {
     Debug.Log("You Died");
     Input.AllowInput = false;
@@ -71,11 +76,11 @@ public class PlayerManager : MonoBehaviour
 
   private void OnSpawn() {
     InitSpawnPoints();
+    m_Inventory = m_LevelStartInventory.Clone();
     Input.AllowInput = true;
   }
 
-  private void InitSpawnPoints()
-  {
+  private void InitSpawnPoints() {
     GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
     m_SpawnPoints = new SpawnPoint[spawnPoints.Length];
     foreach (GameObject gObj in spawnPoints)
@@ -96,5 +101,9 @@ public class PlayerManager : MonoBehaviour
     if (m_PlayerChar.SpawnAtSpawnPoint) {
       m_PlayerChar.transform.position = m_SpawnPoints[0].transform.position;
     }
+  }
+
+  private void SaveInventory() {
+    m_LevelStartInventory = m_Inventory.Clone();
   }
 }
