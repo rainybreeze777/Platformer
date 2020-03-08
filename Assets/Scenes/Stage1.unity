@@ -803,11 +803,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa40f19d3125fa19cbd00cf255682d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Item:
-    m_Name: Coffer 1
-    m_ItemId: coffer1
-    m_InventorySprite: {fileID: 21300000, guid: 610c842b39e45f24fa5be1d156dba12f,
-      type: 3}
+  m_ItemName: Coffer1
+  m_ItemId: coffer1
+  m_ItemSprite: {fileID: 21300000, guid: 610c842b39e45f24fa5be1d156dba12f, type: 3}
+  m_ItemSpriteAssetPath: Assets/Sprites/coffer_1.png
 --- !u!212 &488146362
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2488,11 +2487,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa40f19d3125fa19cbd00cf255682d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Item:
-    m_Name: Final Key
-    m_ItemId: finalKey
-    m_InventorySprite: {fileID: 21300000, guid: ac837b11dd0191569b8d3f1e872fa7dc,
-      type: 3}
+  m_ItemName: Final Key
+  m_ItemId: finalKey
+  m_ItemSprite: {fileID: 21300000, guid: ac837b11dd0191569b8d3f1e872fa7dc, type: 3}
+  m_ItemSpriteAssetPath: Assets/Sprites/OldSprites/temp_key_invt.png
 --- !u!1 &1309928080
 GameObject:
   m_ObjectHideFlags: 0

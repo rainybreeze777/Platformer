@@ -5,9 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class SceneObtainableItem : MonoBehaviour
 {
-  public InvtItem m_Item;
-
   private PlayerManager m_PlayerManager;
+
+  public string m_ItemName;
+  public string m_ItemId;
+  public Sprite m_ItemSprite;
+  public string m_ItemSpriteAssetPath;
 
   void Start()
   {
@@ -18,7 +21,11 @@ public class SceneObtainableItem : MonoBehaviour
   {
     if (collider.tag == "Player")
     {
-      m_PlayerManager.ObtainItem(m_Item);
+      m_PlayerManager.ObtainItem(
+        new InvtItem(m_ItemName
+                     , m_ItemId
+                     , m_ItemSprite
+                     , m_ItemSpriteAssetPath));
       Destroy(gameObject);
     }
   }

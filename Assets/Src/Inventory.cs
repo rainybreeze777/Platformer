@@ -9,6 +9,10 @@ public class Inventory {
     m_Items = new List<InvtItem>();
   }
 
+  public Inventory(List<InvtItem> items) {
+    m_Items = items;
+  }
+
   public bool PutInItem(InvtItem item) {
     m_Items.Add(item);
     return true;

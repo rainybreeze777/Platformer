@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
   // Since This object will not get destroyed upon unload, references
   // can be dragged in via inspector
   private EventManager m_EventManager;
-  private PlayerPlatformerController m_PlayerChar;
+  [SerializeField] private PlayerPlatformerController m_PlayerChar;
   private SpawnPoint[] m_SpawnPoints;
 
   private Inventory m_Inventory;
@@ -31,17 +31,22 @@ public class PlayerManager : MonoBehaviour
   }
 
   void Start() {
-    m_PlayerChar = GameObject
-                    .FindWithTag("Player")
-                    .GetComponent<PlayerPlatformerController>() 
-                      as PlayerPlatformerController;
     m_EventManager = GameObject.Find("/EventManager")
                            .GetComponent<EventManager>() as EventManager;
+    if (m_PlayerChar == null) {
+      m_PlayerChar = GameObject.FindGameObjectWithTag("Player")
+                               .GetComponent<PlayerPlatformerController>() 
+                                  as PlayerPlatformerController;
+    }
     m_EventManager.AddListener<PlayerSpawnedUEvent>(OnSpawn);
     m_EventManager.AddListener<AboutToDieUEvent>(AboutToDie);
     m_EventManager.AddListener<TransitionNextSceneUEvent>(SaveInventory);
-    m_LevelStartInventory = m_Inventory.Clone();
     InitSpawnPoints();
+    var sceneLoader = GameObject.Find("/SceneLoader")
+                                .GetComponent<SceneLoader>() as SceneLoader;
+    if (sceneLoader != null) {
+      m_Inventory = new Inventory(sceneLoader.GetSavePoint().AllItems);
+    }
   }
 
   public void ObtainItem(InvtItem item) {
@@ -75,6 +80,9 @@ public class PlayerManager : MonoBehaviour
   }
 
   private void OnSpawn() {
+    m_PlayerChar = GameObject.FindWithTag("Player")
+                             .GetComponent<PlayerPlatformerController>()
+                                as PlayerPlatformerController;
     InitSpawnPoints();
     m_Inventory = m_LevelStartInventory.Clone();
     Input.AllowInput = true;

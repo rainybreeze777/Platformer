@@ -17,6 +17,16 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 1d056a237e43ccd5b9d8acc8a1c0a2c1
   m_SerializeEntries:
+  - m_GUID: 610c842b39e45f24fa5be1d156dba12f
+    m_Address: Assets/Sprites/coffer_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
+  - m_GUID: ac837b11dd0191569b8d3f1e872fa7dc
+    m_Address: Assets/Sprites/OldSprites/temp_key_invt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: cebf9605e96df342880467ef58c89c59
     m_Address: Assets/Prefabs/UI/UIImage.prefab
     m_ReadOnly: 0
