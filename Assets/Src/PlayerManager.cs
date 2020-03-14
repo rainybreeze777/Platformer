@@ -46,6 +46,7 @@ public class PlayerManager : MonoBehaviour
                                 .GetComponent<SceneLoader>() as SceneLoader;
     if (sceneLoader != null) {
       m_Inventory = new Inventory(sceneLoader.GetSavePoint().AllItems);
+      m_LevelStartInventory = m_Inventory.Clone();
     }
   }
 
@@ -84,7 +85,9 @@ public class PlayerManager : MonoBehaviour
                              .GetComponent<PlayerPlatformerController>()
                                 as PlayerPlatformerController;
     InitSpawnPoints();
-    m_Inventory = m_LevelStartInventory.Clone();
+    if (m_LevelStartInventory != null) {
+      m_Inventory = m_LevelStartInventory.Clone();
+    }
     Input.AllowInput = true;
   }
 
