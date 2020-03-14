@@ -11,8 +11,8 @@ public class PlayerPlatformerController : PhysicsObject {
 
   public float m_FallDeathThreshold = 10f;
 
-  public EventManager m_EventManager;
-  public PlayerManager m_PlayerManager;
+  private EventManager m_EventManager;
+  private PlayerManager m_PlayerManager;
 
   public bool m_SpawnAtSpawnPoint = true;
 
@@ -27,6 +27,12 @@ public class PlayerPlatformerController : PhysicsObject {
   void Awake() {
     spriteRenderer = GetComponent<SpriteRenderer>();
     m_Animator = GetComponent<Animator>();
+    // Must find across-scene shared objects instead of dragging them in
+    // in inspector, otherwise upon scene reload, the references go missing
+    m_EventManager = GameObject.Find("/EventManager")
+                               .GetComponent<EventManager>() as EventManager;
+    m_PlayerManager = GameObject.Find("/PlayerManager")
+                                .GetComponent<PlayerManager>() as PlayerManager;
   }
 
   protected override void ComputeVelocity() {
@@ -77,8 +83,8 @@ public class PlayerPlatformerController : PhysicsObject {
 
   protected override void Landed() {
     if (m_FallDist > m_FallDeathThreshold) {
+      m_EventManager.Invoke<AboutToDieUEvent>();
       m_Animator.SetTrigger("Die");
-      m_PlayerManager.Die();
     }
     m_FallDist = 0; 
   }
@@ -100,7 +106,7 @@ public class PlayerPlatformerController : PhysicsObject {
   }
 
   void OnDeathAnimationFinish() {
-    m_PlayerManager.CompletelyDead();
+    m_EventManager.Invoke<DeadUEvent>();
   }
 
   bool IsDucking {

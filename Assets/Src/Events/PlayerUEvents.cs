@@ -7,3 +7,9 @@ public class DuckingUEvent : UnityEvent<bool> {}
 public class JumpUEvent : UnityEvent {}
 [System.Serializable]
 public class JumpReleaseUEvent : UnityEvent {}
+[System.Serializable]
+public class AboutToDieUEvent : UnityEvent {}
+[System.Serializable]
+public class DeadUEvent : UnityEvent {}
+[System.Serializable]
+public class PlayerSpawnedUEvent : UnityEvent {}

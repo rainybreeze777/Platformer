@@ -9,6 +9,10 @@ public class Inventory {
     m_Items = new List<InvtItem>();
   }
 
+  public Inventory(List<InvtItem> items) {
+    m_Items = items;
+  }
+
   public bool PutInItem(InvtItem item) {
     m_Items.Add(item);
     return true;
@@ -41,5 +45,19 @@ public class Inventory {
       if (item.Id == id) { return item; }
     }
     return null;
+  }
+
+  public List<InvtItem> AllItems { get { return m_Items; } }
+
+  /// <summary>
+  ///   Creates a new list of shallow cloned InvtItems.
+  ///   Is this acceptable? Should the InvtItem be deep cloned as well?
+  /// </summary>
+  public Inventory Clone() {
+    var ret = new Inventory();
+    foreach(var item in m_Items) {
+      ret.PutInItem(item.ShallowCopy());
+    }
+    return ret;
   }
 }

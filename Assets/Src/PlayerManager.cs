@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,26 +7,46 @@ using Input = Platformer.Input;
 
 public class PlayerManager : MonoBehaviour
 {
-  public EventManager m_EventManager;
-  public PlayerPlatformerController m_PlayerChar;
-  public Transform m_SpawnPoint;
+  // Since This object will not get destroyed upon unload, references
+  // can be dragged in via inspector
+  private EventManager m_EventManager;
+  [SerializeField] private PlayerPlatformerController m_PlayerChar;
+  private SpawnPoint[] m_SpawnPoints;
 
   private Inventory m_Inventory;
-  private bool m_IsDead;
+  private Inventory m_LevelStartInventory;
 
-  private static bool s_Registered = false;
+  private static PlayerManager s_Instance;
 
   void Awake() {
-    m_Inventory = new Inventory();
-    if (!s_Registered) {
-      SceneManager.sceneLoaded += OnSceneLoaded;
+    if (s_Instance == null) {
+      s_Instance = this;
+    } else {
+      Destroy(this.gameObject);
+      return;
     }
-    s_Registered = true;
+    DontDestroyOnLoad(this.gameObject);
+
+    m_Inventory = new Inventory();
   }
 
   void Start() {
-    if (m_PlayerChar.SpawnAtSpawnPoint) {
-      m_PlayerChar.transform.position = m_SpawnPoint.position;
+    m_EventManager = GameObject.Find("/EventManager")
+                           .GetComponent<EventManager>() as EventManager;
+    if (m_PlayerChar == null) {
+      m_PlayerChar = GameObject.FindGameObjectWithTag("Player")
+                               .GetComponent<PlayerPlatformerController>() 
+                                  as PlayerPlatformerController;
+    }
+    m_EventManager.AddListener<PlayerSpawnedUEvent>(OnSpawn);
+    m_EventManager.AddListener<AboutToDieUEvent>(AboutToDie);
+    m_EventManager.AddListener<TransitionNextSceneUEvent>(SaveInventory);
+    InitSpawnPoints();
+    var sceneLoader = GameObject.Find("/SceneLoader")
+                                .GetComponent<SceneLoader>() as SceneLoader;
+    if (sceneLoader != null) {
+      m_Inventory = new Inventory(sceneLoader.GetSavePoint().AllItems);
+      m_LevelStartInventory = m_Inventory.Clone();
     }
   }
 
@@ -52,20 +73,48 @@ public class PlayerManager : MonoBehaviour
     return m_Inventory.HasItemById(id);
   }
 
-  public void Die() {
-    if (!m_IsDead) {
-      Debug.Log("You Died");
-      Input.AllowInput = false;
-      m_IsDead = true;
+  public List<InvtItem> AllItems { get { return m_Inventory.AllItems; } }
+
+  private void AboutToDie() {
+    Debug.Log("You Died");
+    Input.AllowInput = false;
+  }
+
+  private void OnSpawn() {
+    m_PlayerChar = GameObject.FindWithTag("Player")
+                             .GetComponent<PlayerPlatformerController>()
+                                as PlayerPlatformerController;
+    InitSpawnPoints();
+    if (m_LevelStartInventory != null) {
+      m_Inventory = m_LevelStartInventory.Clone();
+    }
+    Input.AllowInput = true;
+  }
+
+  private void InitSpawnPoints() {
+    GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
+    m_SpawnPoints = new SpawnPoint[spawnPoints.Length];
+    foreach (GameObject gObj in spawnPoints)
+    {
+      SpawnPoint point = gObj.GetComponent<SpawnPoint>() as SpawnPoint;
+      if (point.SpawnIndex >= m_SpawnPoints.Length)
+      {
+        point.ThrowIndexOutOfRangeException(m_SpawnPoints.Length);
+      }
+      if (m_SpawnPoints[point.SpawnIndex] != null)
+      {
+        point.ThrowDuplicateSpawnPointsException();
+        continue;
+      }
+      m_SpawnPoints[point.SpawnIndex] = point;
+    }
+
+    if (m_PlayerChar.SpawnAtSpawnPoint) {
+      m_PlayerChar.transform.position = m_SpawnPoints[0].transform.position;
     }
   }
 
-  public void CompletelyDead() {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-  }
-
-  private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-    m_IsDead = false;
-    Input.AllowInput = true;
+  private void SaveInventory() {
+    m_LevelStartInventory = m_Inventory.Clone();
   }
 }

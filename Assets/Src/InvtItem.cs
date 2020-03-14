@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 [System.Serializable]
 // Inventory Item, used InvtItem to avoid a weird
@@ -7,13 +8,29 @@ public class InvtItem
 {
   [SerializeField] private string m_Name;
   [SerializeField] private string m_ItemId;
-  [SerializeField] private Sprite m_InventorySprite;
+  [SerializeField] private string m_InventorySpriteAssetPath;
+  private Sprite m_InventorySprite;
 
-  public InvtItem(string name, string id, Sprite renderer)
+  public InvtItem(string name
+                  , string id
+                  , Sprite renderer
+                  , string spriteAssetPath)
   {
     m_Name = name;
     m_ItemId = id;
     m_InventorySprite = renderer;
+    m_InventorySpriteAssetPath = spriteAssetPath;
+  }
+
+  public InvtItem ShallowCopy() {
+    return this.MemberwiseClone() as InvtItem;
+  }
+
+  public void AsyncInitSprite() {
+    Addressables.LoadAssetAsync<Sprite>(m_InventorySpriteAssetPath).Completed += (asyncRes) =>
+    {
+      m_InventorySprite = asyncRes.Result;
+    };
   }
 
   public string Name { get { return m_Name; } }

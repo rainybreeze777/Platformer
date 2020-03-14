@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class OneWayPlatform : MonoBehaviour {
 
-  public EventManager m_EventManager;
+  private EventManager m_EventManager;
 
   private bool m_IsDucking = false;
   private PlatformEffector2D m_Effector;
   private float m_OriginalRotation;
 
   void Start() {
+    m_EventManager = GameObject.Find("/EventManager")
+                           .GetComponent<EventManager>() as EventManager;
     m_EventManager.AddListener<DuckingUEvent, bool>(OnPlayerDucking);
     m_EventManager.AddListener<JumpUEvent>(OnPlayerJump);
     m_EventManager.AddListener<JumpReleaseUEvent>(OnPlayerJumpRelease);
