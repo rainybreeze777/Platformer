@@ -51,7 +51,7 @@ public class PhysicsObject : MonoBehaviour
 
     grounded = false;
 
-    var extraMoving = new List<SelfMovableObject>();
+    var extraMoving = new List<ISceneMovable>();
 
     Vector2 deltaPosition = velocity * Time.deltaTime;
 
@@ -75,7 +75,7 @@ public class PhysicsObject : MonoBehaviour
 
     Movement(move, true, extraMoving);
     Vector2 externalVelocities = Vector2.zero;
-    foreach (SelfMovableObject movingObj in extraMoving) {
+    foreach (ISceneMovable movingObj in extraMoving) {
       externalVelocities += movingObj.Velocity;
     }
     rb2d.position += externalVelocities * Time.deltaTime;
@@ -86,7 +86,7 @@ public class PhysicsObject : MonoBehaviour
     m_PrevGrounded = grounded;
   }
 
-  void Movement(Vector2 move, bool yMovement, List<SelfMovableObject> additionalObjects) {
+  void Movement(Vector2 move, bool yMovement, List<ISceneMovable> additionalObjects) {
     float distance = move.magnitude;
 
     if (distance > minMoveDistance) {
@@ -126,8 +126,10 @@ public class PhysicsObject : MonoBehaviour
         if (projection < 0) {
           velocity = velocity - projection * currentNormal;
         }
-        if (hit.transform.tag == "SelfMovable") {
-          additionalObjects.Add(hit.transform.GetComponent<SelfMovableObject>());
+
+        ISceneMovable movable = hit.transform.GetComponent<ISceneMovable>() as ISceneMovable;
+        if (movable != null) {
+          additionalObjects.Add(movable);
         }
 
         float modifiedDistance = hit.distance - shellRadius;

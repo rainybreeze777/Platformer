@@ -29,4 +29,6 @@ public class SceneObtainableItem : MonoBehaviour
       Destroy(gameObject);
     }
   }
+
+  public string ItemId { get { return m_ItemId; } }
 }

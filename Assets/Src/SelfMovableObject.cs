@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class SelfMovableObject : Triggerable
+[RequireComponent(typeof(Rigidbody2D))]
+public class SelfMovableObject : Triggerable, ISceneMovable
 {
   public bool m_ShouldMove = false;
   public bool m_OneTimeTrigger = true;
