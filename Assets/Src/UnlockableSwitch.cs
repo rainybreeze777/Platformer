@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class UnlockableLever : MonoBehaviour, IUnlockable {
+public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   
   public List<SceneObtainableItem> m_UnlockItems;
   public bool m_AutoReset = false;
