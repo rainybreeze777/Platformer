@@ -11,6 +11,8 @@ public class SceneObtainableItem : MonoBehaviour
   public string m_ItemId;
   public Sprite m_ItemSprite;
   public string m_ItemSpriteAssetPath;
+  public SceneObtainableItem m_SceneObtainablePrefab;
+  public string m_PrefabAssetPath;
 
   void Start()
   {
@@ -25,7 +27,8 @@ public class SceneObtainableItem : MonoBehaviour
         new InvtItem(m_ItemName
                      , m_ItemId
                      , m_ItemSprite
-                     , m_ItemSpriteAssetPath));
+                     , m_ItemSpriteAssetPath
+                     , mPrefabAssetPath));
       Destroy(gameObject);
     }
   }

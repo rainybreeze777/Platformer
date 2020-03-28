@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(SceneObtainableItem))]
 public class SceneObtainableItemEditor : Editor
@@ -7,6 +8,8 @@ public class SceneObtainableItemEditor : Editor
   SerializedProperty m_ItemId;
   SerializedProperty m_ItemSprite;
   SerializedProperty m_ItemSpriteAssetPath;
+  SerializedProperty m_SceneObtainablePrefab;
+  SerializedProperty m_PrefabAssetPath;
 
   private const string kAssetPrefix = "Assets/Sprites";
 
@@ -16,6 +19,8 @@ public class SceneObtainableItemEditor : Editor
     m_ItemSprite = serializedObject.FindProperty("m_ItemSprite");
     m_ItemSpriteAssetPath = 
       serializedObject.FindProperty("m_ItemSpriteAssetPath");
+    m_SceneObtainablePrefab = serializedObject.FindProperty("m_SceneObtainablePrefab");
+    m_PrefabAssetPath = serializedObject.FindProperty("m_PrefabAssetPath");
   }
 
   public override void OnInspectorGUI() {
@@ -26,6 +31,10 @@ public class SceneObtainableItemEditor : Editor
     using (new EditorGUI.DisabledScope(true)) {
       EditorGUILayout.PropertyField(m_ItemSpriteAssetPath);
     }
+    EditorGUILayout.PropertyField(m_SceneObtainablePrefab);
+    using (new EditorGUI.DisabledScope(true)) {
+      EditorGUILayout.PropertyField(m_PrefabAssetPath);
+    }
 
     if (m_ItemSprite.objectReferenceValue != null) {
       string assetPath =
@@ -35,6 +44,16 @@ public class SceneObtainableItemEditor : Editor
       {
         m_ItemSpriteAssetPath.stringValue = assetPath;
       }
+    }
+
+    if (m_SceneObtainablePrefab.objectReferenceValue != null
+        && PrefabUtility.IsPartOfPrefabAsset(m_SceneObtainablePrefab.objectReferenceValue)) {
+
+      m_PrefabAssetPath.stringValue = 
+        AssetDatabase.GetAssetPath(m_SceneObtainablePrefab
+                                      .objectReferenceValue
+                                      .GetInstanceID());
+
     }
 
     serializedObject.ApplyModifiedProperties();

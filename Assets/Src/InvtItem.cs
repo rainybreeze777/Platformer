@@ -9,17 +9,20 @@ public class InvtItem
   [SerializeField] private string m_Name;
   [SerializeField] private string m_ItemId;
   [SerializeField] private string m_InventorySpriteAssetPath;
+  [SerializeField] private string m_SceneObtainablePrefabAssetPath;
   private Sprite m_InventorySprite;
 
   public InvtItem(string name
                   , string id
                   , Sprite renderer
-                  , string spriteAssetPath)
+                  , string spriteAssetPath
+                  , string sceneObtainableAssetPath)
   {
     m_Name = name;
     m_ItemId = id;
     m_InventorySprite = renderer;
     m_InventorySpriteAssetPath = spriteAssetPath;
+    m_SceneObtainablePrefabAssetPath = sceneObtainableAssetPath;
   }
 
   public InvtItem ShallowCopy() {
