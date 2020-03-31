@@ -14,11 +14,11 @@ public class UIInventoryListener : MonoBehaviour {
   private InvtItem m_CacheItem;
   // Dictionary to store quick UI object look up
   // Key: ItemId
-  // Value: UI GameObject
-  private Dictionary<string, GameObject> m_ItemsDict;
+  // Value: UIImage
+  private Dictionary<string, UIImage> m_ItemsDict;
 
   void Awake() {
-    m_ItemsDict = new Dictionary<string, GameObject>();
+    m_ItemsDict = new Dictionary<string, UIImage>();
   }
 
   void Start() {
@@ -35,11 +35,13 @@ public class UIInventoryListener : MonoBehaviour {
 
   public void OnObtainItem(InvtItem item) {
     m_CacheItem = item;
-    Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/UI/UIImage.prefab").Completed += (asyncRes) => {
-      GameObject imageObj = Instantiate(asyncRes.Result, new Vector3(0, 0, 0), Quaternion.identity);
-      Image image = imageObj.GetComponent<Image>();
-      image.preserveAspect = true;
-      image.sprite = m_CacheItem.Sprite;
+    Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/UI/UIImage.prefab")
+                .Completed += (asyncRes) => {
+      UIImage imageObj = Instantiate(asyncRes.Result
+                                     , new Vector3(0, 0, 0)
+                                     , Quaternion.identity)
+                            .GetComponent<UIImage>() as UIImage;
+      imageObj.Init(m_PlayerManager, m_CacheItem.Id, m_CacheItem.Sprite);
       imageObj.transform.SetParent(gameObject.transform);
       m_ItemsDict[item.Id] = imageObj;
       m_CacheItem = null;
@@ -48,7 +50,8 @@ public class UIInventoryListener : MonoBehaviour {
 
   public void OnSpendingItem(InvtItem item) {
     m_ItemsDict[item.Id].transform.SetParent(null);
-    Destroy(m_ItemsDict[item.Id]);
+    UIImage uiImage = m_ItemsDict[item.Id];
     m_ItemsDict.Remove(item.Id);
+    Destroy(uiImage.gameObject);
   }
 }

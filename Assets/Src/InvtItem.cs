@@ -30,7 +30,8 @@ public class InvtItem
   }
 
   public void AsyncInitSprite() {
-    Addressables.LoadAssetAsync<Sprite>(m_InventorySpriteAssetPath).Completed += (asyncRes) =>
+    Addressables.LoadAssetAsync<Sprite>(m_InventorySpriteAssetPath)
+                .Completed += (asyncRes) =>
     {
       m_InventorySprite = asyncRes.Result;
     };
@@ -39,4 +40,7 @@ public class InvtItem
   public string Name { get { return m_Name; } }
   public string Id { get { return m_ItemId; } }
   public Sprite Sprite { get { return m_InventorySprite; } }
+  public string ScenePrefabAssetPath {
+    get { return m_SceneObtainablePrefabAssetPath; }
+  }
 }

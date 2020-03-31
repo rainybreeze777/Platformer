@@ -14,13 +14,17 @@ public class SceneObtainableItem : MonoBehaviour
   public SceneObtainableItem m_SceneObtainablePrefab;
   public string m_PrefabAssetPath;
 
-  void Start()
-  {
+  private BoxCollider2D m_Collider;
+
+  void Awake() {
+    m_Collider = GetComponent<BoxCollider2D>();
+  }
+
+  void Start() {
     m_PlayerManager = GameObject.Find("/PlayerManager").GetComponent<PlayerManager>();
   }
 
-  void OnTriggerEnter2D(Collider2D collider)
-  {
+  void OnTriggerEnter2D(Collider2D collider) {
     if (collider.tag == "Player")
     {
       m_PlayerManager.ObtainItem(
@@ -28,10 +32,11 @@ public class SceneObtainableItem : MonoBehaviour
                      , m_ItemId
                      , m_ItemSprite
                      , m_ItemSpriteAssetPath
-                     , mPrefabAssetPath));
+                     , m_PrefabAssetPath));
       Destroy(gameObject);
     }
   }
 
   public string ItemId { get { return m_ItemId; } }
+  public Collider2D ItemCollider { get { return m_Collider; } }
 }

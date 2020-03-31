@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
 using Input = Platformer.Input;
 
 public class PlayerManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerManager : MonoBehaviour
   private EventManager m_EventManager;
   [SerializeField] private PlayerPlatformerController m_PlayerChar;
   private SpawnPoint[] m_SpawnPoints;
+  private Transform m_MainFrame;
 
   private Inventory m_Inventory;
   private Inventory m_LevelStartInventory;
@@ -73,6 +75,40 @@ public class PlayerManager : MonoBehaviour
     return m_Inventory.HasItemById(id);
   }
 
+  public bool DropItemById(string id) {
+    Debug.Assert(m_Inventory.HasItemById(id)
+                 , "Player inventory does not have item id " + id);
+    if (m_Inventory.HasItemById(id)) {
+      InvtItem item = m_Inventory.GetItemById(id);
+      string assetPath = item.ScenePrefabAssetPath;
+      Addressables.LoadAssetAsync<GameObject>(assetPath)
+                  .Completed += (asyncRes) =>
+      {
+        // Instantiate it out-of-scene first, to instantiate its collider
+        SceneObtainableItem dropSceneItem = 
+          Instantiate(asyncRes.Result
+                      , Vector3.zero
+                      , Quaternion.identity)
+            .GetComponent<SceneObtainableItem>() as SceneObtainableItem;
+        // dropSceneItem.gameObject.SetActive(false);
+
+        // Then after determining it can be placed into scene, we set its
+        // world position. if not then delete it
+        if (m_PlayerChar.CanDropItem(dropSceneItem.ItemCollider
+                                     , out Vector3 dropPosition)) {
+          dropSceneItem.transform.SetParent(m_MainFrame);
+          dropSceneItem.transform.position = dropPosition;
+          dropSceneItem.gameObject.SetActive(true);
+          SpendItem(item);
+        } else {
+          Destroy(dropSceneItem.gameObject);
+        }
+      };
+      return true;
+    }
+    return false;
+  }
+
   public List<InvtItem> AllItems { get { return m_Inventory.AllItems; } }
 
   private void AboutToDie() {
@@ -88,6 +124,8 @@ public class PlayerManager : MonoBehaviour
     if (m_LevelStartInventory != null) {
       m_Inventory = m_LevelStartInventory.Clone();
     }
+    m_MainFrame = GameObject.FindWithTag("MainFrame")
+                            .GetComponent<Transform>() as Transform;
     Input.AllowInput = true;
   }
 
