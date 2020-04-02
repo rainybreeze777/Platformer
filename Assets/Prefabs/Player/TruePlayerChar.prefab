@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 1872273063838350327}
   - component: {fileID: 1081054369402067393}
   - component: {fileID: 8170105554875804481}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TruePlayerChar
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -205,12 +205,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.3
-  gravityModifier: 2
+  gravityModifier: 1
   debugRayLength: 5
-  maxSpeed: 7.5
-  jumpTakeOffSpeed: 15
-  m_FallDeathThreshold: 15
+  maxSpeed: 3.5
+  jumpTakeOffSpeed: 7
+  m_FallDeathThreshold: 5
+  m_DropItemDistance: 1
+  m_DropItemMaxRaisePercentage: 20
   m_SpawnAtSpawnPoint: 0
+  m_ThrowAngle: 15
+  m_ThrowForce: 3
 --- !u!95 &8170105554875804481
 Animator:
   serializedVersion: 3

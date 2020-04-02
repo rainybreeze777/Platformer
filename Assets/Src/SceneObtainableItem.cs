@@ -24,17 +24,13 @@ public class SceneObtainableItem : MonoBehaviour
     m_PlayerManager = GameObject.Find("/PlayerManager").GetComponent<PlayerManager>();
   }
 
-  void OnTriggerEnter2D(Collider2D collider) {
-    if (collider.tag == "Player")
-    {
-      m_PlayerManager.ObtainItem(
-        new InvtItem(m_ItemName
-                     , m_ItemId
-                     , m_ItemSprite
-                     , m_ItemSpriteAssetPath
-                     , m_PrefabAssetPath));
-      Destroy(gameObject);
-    }
+  public void ObtainThis() {
+    m_PlayerManager.ObtainItem(new InvtItem(m_ItemName
+                                            , m_ItemId
+                                            , m_ItemSprite
+                                            , m_ItemSpriteAssetPath
+                                            , m_PrefabAssetPath));
+    Destroy(gameObject);
   }
 
   public string ItemId { get { return m_ItemId; } }

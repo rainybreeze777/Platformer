@@ -85,13 +85,17 @@ public class PlayerManager : MonoBehaviour
                   .Completed += (asyncRes) =>
       {
         // Instantiate it out-of-scene first, to instantiate its collider
-        SceneObtainableItem dropSceneItem = 
+        GameObject dropSceneItem = 
           Instantiate(asyncRes.Result
-                      , Vector3.zero
-                      , Quaternion.identity)
-            .GetComponent<SceneObtainableItem>() as SceneObtainableItem;
+                      , m_PlayerChar.transform.position
+                      , Quaternion.identity);
+        dropSceneItem.transform.SetParent(m_MainFrame);
+        dropSceneItem.GetComponent<Rigidbody2D>()
+                     .AddForce(m_PlayerChar.ThrowVector, ForceMode2D.Impulse);
+        SpendItem(item);
         // dropSceneItem.gameObject.SetActive(false);
 
+        /*
         // Then after determining it can be placed into scene, we set its
         // world position. if not then delete it
         if (m_PlayerChar.CanDropItem(dropSceneItem.ItemCollider
@@ -103,6 +107,7 @@ public class PlayerManager : MonoBehaviour
         } else {
           Destroy(dropSceneItem.gameObject);
         }
+        */
       };
       return true;
     }
