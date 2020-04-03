@@ -93,21 +93,6 @@ public class PlayerManager : MonoBehaviour
         dropSceneItem.GetComponent<Rigidbody2D>()
                      .AddForce(m_PlayerChar.ThrowVector, ForceMode2D.Impulse);
         SpendItem(item);
-        // dropSceneItem.gameObject.SetActive(false);
-
-        /*
-        // Then after determining it can be placed into scene, we set its
-        // world position. if not then delete it
-        if (m_PlayerChar.CanDropItem(dropSceneItem.ItemCollider
-                                     , out Vector3 dropPosition)) {
-          dropSceneItem.transform.SetParent(m_MainFrame);
-          dropSceneItem.transform.position = dropPosition;
-          dropSceneItem.gameObject.SetActive(true);
-          SpendItem(item);
-        } else {
-          Destroy(dropSceneItem.gameObject);
-        }
-        */
       };
       return true;
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Input = Platformer.Input;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class UnlockableSwitch : MonoBehaviour, IUnlockable {
@@ -46,17 +47,15 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   void OnTriggerEnter2D(Collider2D collider) {
     if (collider.tag == "Player") {
       m_IsPlayerInRange = true;
-      if (m_IsLocked) {
-        var itemsToUse = new List<string>();
-        foreach (string itemId in m_UnlockNeededItemIds) {
-          if (m_PlayerManager.HasItemById(itemId))
-          {
-            itemsToUse.Add(itemId);
-          }
-        }
-        foreach (string itemId in itemsToUse) {
-          m_PlayerManager.SpendItemById(itemId);
-          m_UnlockNeededItemIds.Remove(itemId);
+    } else {
+      SceneObtainableItem item = 
+        collider.gameObject.GetComponent<SceneObtainableItem>()
+          as SceneObtainableItem;
+      if (item != null && m_IsLocked) {
+
+        if (m_UnlockNeededItemIds.Contains(item.ItemId)) {
+          m_UnlockNeededItemIds.Remove(item.ItemId);
+          Destroy(item.gameObject);
         }
         if (m_UnlockNeededItemIds.Count == 0) {
           Unlock();
