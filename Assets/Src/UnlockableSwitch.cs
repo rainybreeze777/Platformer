@@ -35,10 +35,10 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
       if (m_IsPlayerInRange && Input.GetButtonDown("Action")) {
         if (!m_IsOn) {
           m_IsOn = true;
-          PullOn();
+          TurnOn();
         } else if (!m_AutoReset) {
           m_IsOn = false;
-          PullOff();
+          TurnOff();
         }
       }
     }
@@ -77,7 +77,7 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
     }
   }
 
-  private void PullOn() {
+  private void TurnOn() {
     foreach (var target in m_ToggleTargets) {
       target.NotifyToggleOn();
     }
@@ -86,7 +86,7 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
     }
   }
 
-  private void PullOff() {
+  private void TurnOff() {
     foreach (var target in m_ToggleTargets) {
       target.NotifyToggleOff();
     }

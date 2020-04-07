@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 1d056a237e43ccd5b9d8acc8a1c0a2c1
   m_SerializeEntries:
+  - m_GUID: 36cbcb6b808b2ba48a5e2a6fd592cac0
+    m_Address: Assets/Sprites/Item02.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: 610c842b39e45f24fa5be1d156dba12f
     m_Address: Assets/Sprites/coffer_1.png
     m_ReadOnly: 0
@@ -29,6 +34,11 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: 733f1fc97afe7464fb6f08d07bfc34a5
+    m_Address: Assets/Prefabs/SceneObtainableItems/Item02.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: 8671e335ef042c4409d9597a3afada98
     m_Address: Assets/Prefabs/SceneObtainableItems/Coffer.prefab
     m_ReadOnly: 0
@@ -39,7 +49,8 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/SceneObtainableItems/Item01.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_mainAssetType: 
+    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: ac837b11dd0191569b8d3f1e872fa7dc
     m_Address: Assets/Sprites/OldSprites/temp_key_invt.png
     m_ReadOnly: 0
