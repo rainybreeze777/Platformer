@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/JsonDotNet.meta
 guid: 83c470775313c1f4bbf7f5716921d3f2
+=======
+guid: 5a01324609c1f9a4189b0d994b1259e7
+>>>>>>> dev-art:Assets/Sprites/Level1Sprites/Planks.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/NPCs.meta
 guid: 79ac3b2e0f973144e91c506a180c7f5e
+=======
+guid: f9c361372f7ae6f48b953220a349202c
+>>>>>>> dev-art:Assets/Sprites/Level1Sprites/Platforms.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
