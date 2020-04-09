@@ -37,6 +37,48 @@ public class TextManager : MonoBehaviour
     m_Triggers = new Dictionary<string, List<DialogueLine>>();
   }
 
+  public int GetNumberOfDialogueLines(string targetCharTag
+                                      , EConversationType convoType) {
+    var lines = GetDialogueLinesInternal(targetCharTag, convoType);
+    if (lines == null) { return -1; }
+    return lines.Count;
+  }
+
+  public ActorLine GetLine(string targetCharTag
+                           , EConversationType convoType
+                           , int lineIndex) {
+    var lines = GetDialogueLinesInternal(targetCharTag, convoType);
+    DialogueLine oneLine = lines[lineIndex];
+    if (!m_Actors.ContainsKey(oneLine.SpeakerTag)) {
+      Debug.LogError("Unable to find actor with tag " + oneLine.SpeakerTag);
+      return null;
+    }
+    Actor speaker = m_Actors[oneLine.SpeakerTag];
+    return new ActorLine {
+      ActorName = speaker.Name,
+      ActorSprite = speaker.Sprite,
+      LineText = oneLine.LineText
+    };
+  }
+
+  private List<DialogueLine> GetDialogueLinesInternal(
+                              string targetCharTag
+                              , EConversationType convoType) {
+    if (!m_Dialogues.ContainsKey(targetCharTag))
+    {
+      Debug.LogWarning("No dialogue found for character " + targetCharTag);
+      return null;
+    }
+    var lines = m_Dialogues[targetCharTag].GetLines(convoType);
+    if (lines == null)
+    {
+      Debug.LogWarning("No conversation type " + convoType.ToString()
+                       + " found for character " + targetCharTag);
+      return null;
+    }
+    return lines;
+  }
+
   private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
     if (scene.buildIndex == m_CurrentSceneIndex) { return; }
     string sceneTextDataPath = kTextDataRoot + "/" + scene.name + kTextDataExt;
@@ -108,6 +150,7 @@ public class TextManager : MonoBehaviour
           });
         }
       }
+      m_Dialogues.Add(targetCharTag, oneDialogue);
     }
 
     // Finally parse out the triggers
@@ -145,5 +188,23 @@ public class TextManager : MonoBehaviour
       = new List<DialogueLine>();
 
     public List<DialogueLine> DefaultRepeat { get; } = new List<DialogueLine>();
+
+    private Dictionary<EConversationType, List<DialogueLine>> m_LinesMapping;
+    
+    public Dialogue() {
+      m_LinesMapping = new Dictionary<EConversationType, List<DialogueLine>>() {
+        { EConversationType.FirstEncounter, FirstEncounter },
+        { EConversationType.QuestInstructionRepeat, QuestInstructionRepeat },
+        { EConversationType.QuestComplete, QuestComplete },
+        { EConversationType.DefaultRepeat, DefaultRepeat }
+      };
+    }
+
+    public List<DialogueLine> GetLines(EConversationType convoType) {
+      if (m_LinesMapping.TryGetValue(convoType, out List<DialogueLine> lines)) {
+        return lines;
+      }
+      return null;
+    }
   }
 }

@@ -25,6 +25,10 @@ public class Input : UnityEngine.Input {
     return UnityEngine.Input.GetButtonUp(buttonName);
   }
 
+  public static bool GetActionButtonDownIgnoreAllowInput() {
+    return UnityEngine.Input.GetButtonDown("Action");
+  }
+
   public static bool AllowInput { 
     get { return s_AllowInput; }
     set { s_AllowInput = value; }
