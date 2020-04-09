@@ -1,0 +1,83 @@
+{
+  "Actors": [
+    {
+      "Tag": "Narrator",
+      "Name": "",
+      "Sprite": ""
+    },
+    {
+      "Tag": "Player",
+      "Name": "Player1",
+      "Sprite": ""
+    },
+    {
+      "Tag": "NPC1",
+      "Name": "N.P.C 1",
+      "Sprite": ""
+    }
+  ],
+  "Dialogues": {
+    "NPC1": {
+      "FirstEncounter" : [
+        {
+          "Speaker": "NPC1",
+          "Text": "What is your name?"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "I am the Player."
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "What is your purpose?"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "To find the holy grail."
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "What is your favorite color?"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "Blue!"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "I'm sure that's not your favorite color. To make up to me, you will need to find all three hidden items."
+        }
+      ],
+      "QuestInstructionRepeat": [
+        {
+          "Speaker": "NPC1",
+          "Text": "Find all three hidden items, then I'll consider let you proceed."
+        }
+      ],
+      "QuestComplete": [
+        {
+          "Speaker": "Player",
+          "Text": "All three hidden items as promised."
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "Very well. You may now cross to find the holy grail."
+        }
+      ],
+      "DefaultRepeat": [
+        {
+          "Speaker": "NPC1",
+          "Text": "Good day to you."
+        }
+      ]
+    }
+  },
+  "Triggers": {
+    "CombineItems": [
+      {
+        "Speaker": "Narrator",
+        "Text": "All five parts seem to fit together, and they combined"
+      }
+    ]
+  }
+}

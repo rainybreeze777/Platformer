@@ -8,7 +8,6 @@ public class HiddenUnlockable : MonoBehaviour, IUnlockable
   public List<SceneObtainableItem> m_UnlockItems;
   public List<Toggleable> m_ToggleTargets;
   public SecretTriggerAction m_Secret;
-  public EventManager m_EventManager;
 
   private bool m_IsUnlocked = false;
   private bool m_PlayerInRange = false;
@@ -16,8 +15,13 @@ public class HiddenUnlockable : MonoBehaviour, IUnlockable
   private List<string> m_ItemIdsNeeded;
   private List<SceneObtainableItem> m_CurrentInRangeItems;
   private SecretTriggerAction m_SecretTracker;
+  private EventManager m_EventManager;
 
   void Start() {
+    m_EventManager = 
+      GameObject.Find("/EventManager").GetComponent<EventManager>() 
+        as EventManager;
+
     m_UnlockItemIds = new List<string>();
     foreach (var item in m_UnlockItems) {
       m_UnlockItemIds.Add(item.ItemId);

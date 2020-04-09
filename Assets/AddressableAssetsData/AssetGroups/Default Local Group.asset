@@ -69,6 +69,11 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: ec81542f2e1f5094a909cc54eb64e0f3
+    m_Address: Assets/TextData/Level1.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7c5c64230a21c05548da17842848f653, type: 2}
   m_SchemaSet:
