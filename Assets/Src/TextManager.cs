@@ -81,6 +81,7 @@ public class TextManager : MonoBehaviour
 
   private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
     if (scene.buildIndex == m_CurrentSceneIndex) { return; }
+    m_CurrentSceneIndex = scene.buildIndex;
     string sceneTextDataPath = kTextDataRoot + "/" + scene.name + kTextDataExt;
     Addressables.LoadAssetAsync<TextAsset>(sceneTextDataPath)
       .Completed += (asyncRes) => {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Input = Platformer.Input;
 
 [RequireComponent(typeof(Collider2D))]
@@ -13,6 +14,7 @@ public class ConversableChar : MonoBehaviour
 
   private TextManager m_TextManager;
   private PlayerManager m_PlayerManager;
+  private UIManager m_UIManager;
   
   private bool m_PlayerInRange = false;
   private bool m_IsEngagedInConvo = false;
@@ -28,8 +30,10 @@ public class ConversableChar : MonoBehaviour
     m_PlayerManager = GameObject.Find("/PlayerManager")
                         .GetComponent<PlayerManager>()
                           as PlayerManager;
+    m_UIManager = GameObject.Find("/UICanvas").GetComponent<UIManager>()
+                    as UIManager;
     if (m_HasQuest) {
-      m_CSM = new ConversationStateMachine(HasAllItems);
+      m_CSM = new ConversationStateMachine(HasAllItemsAndSpendIfTrue);
     } else {
       m_CSM = new ConversationStateMachine();
     }
@@ -66,11 +70,14 @@ public class ConversableChar : MonoBehaviour
     }
   }
 
-  private bool HasAllItems() {
+  private bool HasAllItemsAndSpendIfTrue() {
     foreach (var itemId in m_NeededQuestItemIds) {
       if (!m_PlayerManager.HasItemById(itemId)) {
         return false;
       }
+    }
+    foreach (var itemId in m_NeededQuestItemIds) {
+      m_PlayerManager.SpendItemById(itemId);
     }
     return true;
   }
@@ -79,13 +86,15 @@ public class ConversableChar : MonoBehaviour
                                            EConversationType convoType) {
     m_IsEngagedInConvo = true;
     Input.AllowInput = false;
+    m_UIManager.ShowDialogueUI();
     int linesCount = m_TextManager.GetNumberOfDialogueLines(charTag, convoType);
     for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex) {
       ActorLine line = m_TextManager.GetLine(charTag, convoType, lineIndex);
-      Debug.Log(line.ActorName + ": " + line.LineText);
+      m_UIManager.PopulateDialogueUI(line);
       yield return new WaitUntil(() => m_GetNextLine);
       m_GetNextLine = false;
     }
+    m_UIManager.HideDialogueUI();
     Input.AllowInput = true;
     m_IsEngagedInConvo = false;
   }
