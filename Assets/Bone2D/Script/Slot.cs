@@ -264,6 +264,7 @@ namespace Bones2D
 
 		void UpdateSlotByInheritSlot(){
 			if(inheritSlot){
+				/*
 				#if UNITY_EDITOR
 				if(!Application.isPlaying){
 					Transform temp = inheritSlot.parent;
@@ -280,7 +281,7 @@ namespace Bones2D
 					inheritSlot.localRotation = rotate;
 				}
 				#endif
-
+				*/
 				if (Application.isPlaying) {
 					Vector3 p = inheritSlot.position;
 					p.z = transform.position.z;

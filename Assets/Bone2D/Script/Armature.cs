@@ -12,7 +12,7 @@ using UnityEditor;
 /// </summary>
 namespace Bones2D
 {
-	[ExecuteInEditMode,DisallowMultipleComponent]
+	[DisallowMultipleComponent]
 	public class Armature : MonoBehaviour {
 
 		public enum SortType{
@@ -52,9 +52,6 @@ namespace Bones2D
 				if(m_AnimIndex!=value || __AnimIndex!=value){
 					m_AnimIndex = value;
 					__AnimIndex = value;
-					if(Application.isPlaying){
-						PlayAnimByIndex();
-					}
 				}
 			}
 		}
@@ -333,11 +330,6 @@ namespace Bones2D
 		}
 		#endif
 
-		void OnEnable(){
-			if(Application.isPlaying){
-				PlayAnimByIndex();
-			}
-		}
 		void OnDisable(){
 			if(Application.isPlaying){
 				SetToPose();
@@ -378,22 +370,6 @@ namespace Bones2D
 					if(m!=null && m.mainTexture==null){
 						m.mainTexture = m_AlphaTex;
 					}
-				}
-			}
-		}
-
-		void PlayAnimByIndex(){
-			if(this.isActiveAndEnabled){
-				if(anims!=null && m_AnimIndex>=0){
-					if(m_AnimIndex<anims.Length){
-						string name = anims[Mathf.FloorToInt(m_AnimIndex)];
-						if(!string.IsNullOrEmpty(name)){
-							animator.Play(name);
-						}
-					}
-				}
-				else if(m_AnimIndex==-1){
-					animator.Play("None");
 				}
 			}
 		}
