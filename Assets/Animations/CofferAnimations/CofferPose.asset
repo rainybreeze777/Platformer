@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a87a118078440422e9a05ba83f9766be, type: 3}
+  m_Name: CofferPose
+  m_EditorClassIdentifier: 
+  boneDatas:
+  - x: 0
+    y: 0
+    rotation: 0
+    sx: 1
+    sy: 1
+  - x: 0
+    y: 0.056999996
+    rotation: 90.1918
+    sx: 1
+    sy: 1
+  - x: 2.5705
+    y: 3.4229999
+    rotation: 164.8961
+    sx: 1
+    sy: 1
+  slotDatas:
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  displayDatas:
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 2.58
+      y: 3.4187999
+      rotation: 0.030000001
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 2.6904998
+      y: -0.0463
+      rotation: 195.14
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 1.6517999
+      y: 0.0045
+      rotation: 269.84
+      sx: 1
+      sy: 1
+    type: 0
