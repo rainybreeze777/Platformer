@@ -589,12 +589,7 @@ namespace Bones2D
 
 			if(genPrefab){
 				string prefabPath = path+".prefab";
-				GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-				if(!prefab){
-					PrefabUtility.CreatePrefab(prefabPath,_armature.gameObject,ReplacePrefabOptions.ConnectToPrefab);
-				}else{
-					PrefabUtility.ReplacePrefab( _armature.gameObject,prefab,ReplacePrefabOptions.ConnectToPrefab);
-				}
+        PrefabUtility.SaveAsPrefabAssetAndConnect(_armature.gameObject, prefabPath, InteractionMode.AutomatedAction);
 			}
 		}
 

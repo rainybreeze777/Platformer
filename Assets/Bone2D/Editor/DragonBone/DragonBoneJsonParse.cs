@@ -119,7 +119,11 @@ namespace Bones2D
 					if(armature.sonArmatures !=null && armature.sonArmatures.Length>0){
 						SetSonArmature( armature, armature.sonArmatures,armatures,copyAllArmatures);
 						if(armatureEditor.genPrefab){
-							PrefabUtility.ReplacePrefab( armature.gameObject, PrefabUtility.GetPrefabParent( armature.gameObject ), ReplacePrefabOptions.ConnectToPrefab );
+							var parentObject = PrefabUtility.GetCorrespondingObjectFromSource(armature.gameObject);
+							if (parentObject != null) {
+								string parentObjectAssetPath = AssetDatabase.GetAssetPath(parentObject);
+                PrefabUtility.SaveAsPrefabAssetAndConnect(armature.gameObject, parentObjectAssetPath, InteractionMode.AutomatedAction);
+              }
 						}
 					}
 				}

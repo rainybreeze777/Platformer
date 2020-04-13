@@ -301,13 +301,13 @@ namespace Bones2D
 				if(genPrefab){
 					for(int i=0;i<m_prefabs.Count;++i){
 						GameObject target = m_prefabs[i];
-						var instanceRoot = PrefabUtility.FindRootGameObjectWithSameParentPrefab(target);
-						var targetPrefab = UnityEditor.PrefabUtility.GetPrefabParent(instanceRoot);
-						PrefabUtility.ReplacePrefab(
-							instanceRoot,
-							targetPrefab,
-							ReplacePrefabOptions.ConnectToPrefab
-						);
+						var instanceRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(target);
+            var targetPrefab = PrefabUtility.GetCorrespondingObjectFromSource(instanceRoot);
+            if (targetPrefab != null)
+            {
+              string targetPrefabAssetPath = AssetDatabase.GetAssetPath(targetPrefab);
+              PrefabUtility.SaveAsPrefabAssetAndConnect(instanceRoot, targetPrefabAssetPath, InteractionMode.AutomatedAction);
+            }
 					}
 				}
 			}
@@ -624,12 +624,7 @@ namespace Bones2D
 
 			if(genPrefab){
 				string prefabPath = path+".prefab";
-				GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-				if(!prefab){
-					PrefabUtility.CreatePrefab(prefabPath,_armature.gameObject,ReplacePrefabOptions.ConnectToPrefab);
-				}else{
-					PrefabUtility.ReplacePrefab( _armature.gameObject,prefab,ReplacePrefabOptions.ConnectToPrefab);
-				}
+        PrefabUtility.SaveAsPrefabAssetAndConnect(_armature.gameObject, prefabPath, InteractionMode.AutomatedAction);
 			}
 		}
 	}
