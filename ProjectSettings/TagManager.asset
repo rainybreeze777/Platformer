@@ -17,13 +17,13 @@ TagManager:
   - UI
   - 
   - 
-  - Background
-  - Foreground
+  - 
+  - 
   - Climbable
   - ObtainableColliding
   - Player
-  - 
-  - 
+  - HiddenPassage
+  - PlayerInHiddenPassage
   - 
   - 
   - 

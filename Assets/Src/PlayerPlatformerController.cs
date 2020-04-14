@@ -27,6 +27,7 @@ public class PlayerPlatformerController : PhysicsObject {
   private bool isClimbing = false;
   private bool isDucking = false;
   private float m_FallDist = 0;
+  private int m_OriginalSortingOrder;
   private Vector3 m_Facing;
 
   private SpriteRenderer spriteRenderer;
@@ -43,6 +44,19 @@ public class PlayerPlatformerController : PhysicsObject {
     m_PlayerManager = GameObject.Find("/PlayerManager")
                                 .GetComponent<PlayerManager>() as PlayerManager;
     m_Facing = new Vector3(1, 0);
+    m_OriginalSortingOrder = spriteRenderer.sortingOrder;
+  }
+
+  public void FlipHiddenPassageLayer(bool toHidden) {
+    int layer = toHidden
+                ? LayerMask.NameToLayer("PlayerInHiddenPassage")
+                : LayerMask.NameToLayer("Player");
+    int sortingOrder = toHidden ? -100 : m_OriginalSortingOrder;
+    gameObject.layer = layer;
+    contactFilter.useTriggers = false;
+    contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(layer));
+    contactFilter.useLayerMask = true;
+    spriteRenderer.sortingOrder = sortingOrder;
   }
 
   protected override void ComputeVelocity() {
