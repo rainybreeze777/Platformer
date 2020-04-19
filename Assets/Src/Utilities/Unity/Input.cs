@@ -25,6 +25,16 @@ public class Input : UnityEngine.Input {
     return UnityEngine.Input.GetButtonUp(buttonName);
   }
 
+  public static new bool GetKeyDown(KeyCode key) {
+    return s_AllowInput ? UnityEngine.Input.GetKeyDown(key) : false;
+  }
+
+  public static bool AnyKeyDown { 
+    get {
+      return s_AllowInput ? UnityEngine.Input.anyKeyDown : false;
+    }
+  }
+
   public static bool GetActionButtonDownIgnoreAllowInput() {
     return UnityEngine.Input.GetButtonDown("Action");
   }
