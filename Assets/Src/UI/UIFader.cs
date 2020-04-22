@@ -17,9 +17,29 @@ public class UIFader : MonoBehaviour
 
   private bool m_InitiatedFade = false;
 
+  private EventManager m_EventManager;
+  private SceneLoader m_SceneLoader;
+
   void Start() {
+    m_EventManager = GameObject.Find("/EventManager")
+                               .GetComponent<EventManager>() as EventManager;
+    m_SceneLoader = GameObject.Find("/SceneLoader")
+                              .GetComponent<SceneLoader>() as SceneLoader;
     m_BlackScreen = GetComponent<RawImage>() as RawImage;
     m_Renderer = GetComponent<CanvasRenderer>() as CanvasRenderer;
+    m_EventManager.AddListener<PlayerSpawnedUEvent>(() => {
+      if (m_SceneLoader.IsReloadedScene) {
+        FadeOutBlack();
+      }
+    });
+    m_EventManager.AddListener<DeadUEvent>(() => {
+      m_FadeInBlackComplete.RemoveAllListeners();
+      m_FadeOutBlackComplete.RemoveAllListeners();
+      m_FadeInBlackComplete.AddListener(() => {
+        m_SceneLoader.RestartScene();
+      });
+      FadeInBlack();
+    });
   }
 
   void Update() {

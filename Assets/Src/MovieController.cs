@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using Input = Platformer.Input;
 
-public class StartSceneMovieController : MonoBehaviour
+public class MovieController : MonoBehaviour
 {
   public UIFader m_Fader;
 

@@ -14,7 +14,8 @@ public class SceneLoader : MonoBehaviour
   private int m_NextSceneIndex;
   private SavePoint m_SavePoint;
   private string m_SavePointFullpath;
-
+  private int m_BeforeLoadSceneIndex = -2;
+  private int m_CurrentSceneIndex = -1;
   private static SceneLoader s_Instance;
 
   void Awake() {
@@ -42,7 +43,6 @@ public class SceneLoader : MonoBehaviour
   }
 
   void Start() {
-    m_EventManager.AddListener<DeadUEvent>(RestartScene);
     m_EventManager.AddListener<TransitionNextSceneUEvent>(LoadNextScene);
   }
 
@@ -63,14 +63,22 @@ public class SceneLoader : MonoBehaviour
   }
 
   public void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+    m_BeforeLoadSceneIndex = m_CurrentSceneIndex;
+    m_CurrentSceneIndex = scene.buildIndex;
     m_EventManager.Invoke<PlayerSpawnedUEvent>();
   }
 
-  public SavePoint GetSavePoint() { return m_SavePoint; }
-
-  private void RestartScene() {
+  public void RestartScene() {
     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
   }
+
+  public bool IsReloadedScene { 
+    get { 
+      return m_CurrentSceneIndex == m_BeforeLoadSceneIndex; 
+    }
+  }
+
+  public SavePoint GetSavePoint() { return m_SavePoint; }
 
   private SavePoint InitializeSavePoint(string savePointFilePath) {
     SavePoint sp = JsonUtility.FromJson<SavePoint>(

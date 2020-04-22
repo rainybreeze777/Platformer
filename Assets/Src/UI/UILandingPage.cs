@@ -7,7 +7,7 @@ using Input = Platformer.Input;
 
 public class UILandingPage : MonoBehaviour
 {
-  public StartSceneMovieController m_MovieController;
+  public MovieController m_MovieController;
   public VideoPlayer m_Opening;
   public VideoPlayer m_Countdown;
 
