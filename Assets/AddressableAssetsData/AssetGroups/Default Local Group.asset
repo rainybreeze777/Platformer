@@ -23,12 +23,6 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  - m_GUID: 610c842b39e45f24fa5be1d156dba12f
-    m_Address: Assets/Sprites/coffer_1.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   - m_GUID: 733f1fc97afe7464fb6f08d07bfc34a5
     m_Address: Assets/Prefabs/SceneObtainableItems/Item02.prefab
     m_ReadOnly: 0
@@ -40,30 +34,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  - m_GUID: 931ee2d896bcb3f4fbeedc042122f069
-    m_Address: Assets/Prefabs/SceneObtainableItems/HiddenItem01.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  - m_GUID: 96908dcdc93d99e4296982e66b681aa4
-    m_Address: Assets/Sprites/hidden_item_01.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  - m_GUID: a83143800b977714a888917200755ac7
-    m_Address: Assets/Prefabs/SceneObtainableItems/HiddenItem02.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  - m_GUID: ac837b11dd0191569b8d3f1e872fa7dc
-    m_Address: Assets/Sprites/OldSprites/temp_key_invt.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: bdce4a95fd2d61e4981a3e164366c908
     m_Address: Assets/Sprites/Item01.png
@@ -77,13 +47,9 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  - m_GUID: ec81542f2e1f5094a909cc54eb64e0f3
-    m_Address: Assets/TextData/TestScene.json
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7c5c64230a21c05548da17842848f653, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: f30c162989161618b9848c6bcd1c7eb7, type: 2}
+    - {fileID: 11400000, guid: 71132e531025d7470b892d777504ac65, type: 2}
