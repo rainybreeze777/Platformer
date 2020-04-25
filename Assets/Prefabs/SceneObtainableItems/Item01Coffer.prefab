@@ -136,7 +136,7 @@ MonoBehaviour:
   m_PreMultiplyAlpha: 0
   color: {r: 1, g: 1, b: 1, a: 1}
   m_SortingLayerName: Default
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ZOrderValid: 0
   m_isUGUI: 0
 --- !u!95 &4557200055557811109
@@ -207,7 +207,7 @@ MonoBehaviour:
   manualZ: 0
   armature: {fileID: 1129986948265955148}
   zOrder: 2
-  m_ZOrder: 0
+  m_ZOrder: 1
   color: {r: 1, g: 1, b: 1, a: 1}
   m_CurrentDisplay: {fileID: 4912875549693160938}
   __z: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   manualZ: 0
   armature: {fileID: 1129986948265955148}
   zOrder: 1
-  m_ZOrder: 0
+  m_ZOrder: 1
   color: {r: 1, g: 1, b: 1, a: 1}
   m_CurrentDisplay: {fileID: 2929382482617298768}
   __z: 0
@@ -404,7 +404,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1037973718289326400, guid: 458f8f160ad3a9f49af38bb6efb220da,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -485,7 +485,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1323508761281382643, guid: 458f8f160ad3a9f49af38bb6efb220da,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -566,7 +566,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7769639394009261107, guid: 458f8f160ad3a9f49af38bb6efb220da,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -724,7 +724,7 @@ MonoBehaviour:
   manualZ: 0
   armature: {fileID: 1129986948265955148}
   zOrder: 0
-  m_ZOrder: 0
+  m_ZOrder: 1
   color: {r: 1, g: 1, b: 1, a: 1}
   m_CurrentDisplay: {fileID: 3160493541584352208}
   __z: 0

@@ -82,6 +82,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4867703981419314686, guid: 561636a9c93dd0e418476d7b43a27d40,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -8278663509518028399, guid: 561636a9c93dd0e418476d7b43a27d40,
         type: 3}
       propertyPath: m_Material

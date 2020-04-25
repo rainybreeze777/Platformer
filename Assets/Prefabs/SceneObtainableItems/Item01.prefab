@@ -67,26 +67,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_Sprite
+      propertyPath: m_ItemName
+      value: Item 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+        type: 3}
+      propertyPath: m_ItemId
+      value: item01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+        type: 3}
+      propertyPath: m_ItemSprite
       value: 
       objectReference: {fileID: 21300000, guid: bdce4a95fd2d61e4981a3e164366c908,
         type: 3}
-    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_Size.x
-      value: 3.06
+      propertyPath: m_ItemSpriteAssetPath
+      value: Assets/Sprites/Item01.png
       objectReference: {fileID: 0}
-    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_Size.y
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+      propertyPath: m_SceneObtainablePrefab
+      value: 
+      objectReference: {fileID: 7340636938270165120}
+    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
+      propertyPath: m_PrefabAssetPath
+      value: Assets/Prefabs/SceneObtainableItems/Item01.prefab
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166561, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
@@ -133,36 +143,26 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 3.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_ItemName
-      value: Item 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
-        type: 3}
-      propertyPath: m_ItemId
-      value: item01
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
-        type: 3}
-      propertyPath: m_ItemSprite
+      propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: bdce4a95fd2d61e4981a3e164366c908,
         type: 3}
-    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_ItemSpriteAssetPath
-      value: Assets/Sprites/Item01.png
+      propertyPath: m_Size.x
+      value: 3.06
       objectReference: {fileID: 0}
-    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_SceneObtainablePrefab
-      value: 
-      objectReference: {fileID: 7340636938270165120}
-    - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
+      propertyPath: m_Size.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
-      propertyPath: m_PrefabAssetPath
-      value: Assets/Prefabs/SceneObtainableItems/Item01.prefab
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4405721157093880676, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
