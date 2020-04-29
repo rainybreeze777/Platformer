@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: DebugAssets
+  m_EditorClassIdentifier: 
+  m_GroupName: DebugAssets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 7654a73bba30eea42841999186b76172
+  m_SerializeEntries:
+  - m_GUID: ec81542f2e1f5094a909cc54eb64e0f3
+    m_Address: Assets/TextData/TestScene.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7c5c64230a21c05548da17842848f653, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: dc04bb8a9d381614d83ff8af7adffd71, type: 2}
+    - {fileID: 11400000, guid: dddc95c05c9fc7d4993569fb116b74cb, type: 2}

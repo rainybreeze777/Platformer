@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 // Hide Unity Input class as we want to have more convenient control
@@ -29,9 +30,12 @@ public class PlayerPlatformerController : PhysicsObject {
   private float m_FallDist = 0;
   private int m_OriginalSortingOrder;
   private Vector3 m_Facing;
+  private Vector3 m_ScriptedTargetPos;
 
   private SpriteRenderer spriteRenderer;
   private Animator m_Animator;
+
+  private Action m_OnForceMoveArrive;
 
   // Use this for initialization
   void Awake() {
@@ -47,16 +51,26 @@ public class PlayerPlatformerController : PhysicsObject {
     m_OriginalSortingOrder = spriteRenderer.sortingOrder;
   }
 
-  public void FlipHiddenPassageLayer(bool toHidden) {
+  public void FlipHiddenPassageLayer(bool toHidden, int targetSortingLayer = -100) {
     int layer = toHidden
                 ? LayerMask.NameToLayer("PlayerInHiddenPassage")
                 : LayerMask.NameToLayer("Player");
-    int sortingOrder = toHidden ? -100 : m_OriginalSortingOrder;
+    int sortingOrder = toHidden ? targetSortingLayer : m_OriginalSortingOrder;
     gameObject.layer = layer;
     contactFilter.useTriggers = false;
     contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(layer));
     contactFilter.useLayerMask = true;
     spriteRenderer.sortingOrder = sortingOrder;
+  }
+
+  public void ScriptedMoveToPoint(Vector3 pos, Action onForceMoveArrive) {
+    ForcedMove = true;
+    m_ScriptedTargetPos = pos;
+    m_OnForceMoveArrive = onForceMoveArrive;
+    Vector3 rb2dPos = rb2d.position;
+    Vector3 moveDirection = pos - rb2dPos;
+    moveDirection.y = moveDirection.z = 0;
+    m_Facing = moveDirection.normalized;
   }
 
   protected override void ComputeVelocity() {
@@ -106,6 +120,21 @@ public class PlayerPlatformerController : PhysicsObject {
     Debug.DrawRay(gameObject.transform.position
                   , ThrowVector * debugRayLength
                   , Color.white);
+  }
+
+  protected override void ComputeForcedMoveVelocity() {
+    Vector2 move = Vector2.zero;
+    Vector3 rb2dPos = rb2d.position;
+    if (Vector3.Dot((rb2dPos - m_ScriptedTargetPos), m_Facing) > 0) {
+      targetVelocity = Vector2.zero;
+      ForcedMove = false;
+      m_ScriptedTargetPos = Vector3.zero;
+      m_OnForceMoveArrive?.Invoke();
+      m_OnForceMoveArrive = null;
+    } else {
+      move.x = m_ScriptedTargetPos.x > rb2d.position.x ? 1 : -1;
+      targetVelocity = move * maxSpeed;
+    }
   }
 
   protected override void FallDistance(float distance) {
