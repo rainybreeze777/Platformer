@@ -23,6 +23,8 @@ public class PhysicsObject : MonoBehaviour
 
   protected float settedGravityModifier;
 
+  private bool m_ForcedMove = false;
+
   void OnEnable() {
     rb2d = GetComponent<Rigidbody2D>();
     settedGravityModifier = gravityModifier;
@@ -36,24 +38,29 @@ public class PhysicsObject : MonoBehaviour
 
   void Update() {
     targetVelocity = Vector2.zero;
-    ComputeVelocity();
+    if (ForcedMove) {
+      ComputeForcedMoveVelocity();
+    } else {
+      ComputeVelocity();
+    }
   }
 
   protected virtual void ComputeVelocity() {}
+  protected virtual void ComputeForcedMoveVelocity() { }
   protected virtual void FallDistance(float distance) {}
   protected virtual void Landed() {}
 
   private bool m_PrevGrounded = true;
 
   void FixedUpdate() {
-    velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+    velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
     velocity.x = targetVelocity.x;
 
     grounded = false;
 
     var extraMoving = new List<ISceneMovable>();
 
-    Vector2 deltaPosition = velocity * Time.deltaTime;
+    Vector2 deltaPosition = velocity * Time.fixedDeltaTime;
 
     Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
 
@@ -78,7 +85,7 @@ public class PhysicsObject : MonoBehaviour
     foreach (ISceneMovable movingObj in extraMoving) {
       externalVelocities += movingObj.Velocity;
     }
-    rb2d.position += externalVelocities * Time.deltaTime;
+    rb2d.position += externalVelocities * Time.fixedDeltaTime;
 
     if (grounded && !m_PrevGrounded) {
       Landed();
@@ -143,5 +150,10 @@ public class PhysicsObject : MonoBehaviour
     }
 
     rb2d.position = rb2d.position + move.normalized * distance;
+  }
+
+  public bool ForcedMove {
+    get { return m_ForcedMove; }
+    set { m_ForcedMove = value; }
   }
 }
