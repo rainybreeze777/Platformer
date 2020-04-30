@@ -2,13 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Input = Platformer.Input;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class ScriptedMoveTrigger : MonoBehaviour
 {
   public bool m_IsThroughHidden;
+  public float m_PushSecondsToTrigger = 0.5f;
+  public Collider2D m_StoppingCollider;
 
   private Vector3 m_TargetPoint;
+  private bool m_IsTouching = false;
+
+  private PlayerPlatformerController m_Player;
+  private float m_PushedSeconds = 0;
 
   void Start() {
     bool noTargetPoint = true;
@@ -25,17 +32,44 @@ public class ScriptedMoveTrigger : MonoBehaviour
     }
   }
 
+  void Update() {
+    if (m_IsTouching) {
+      if (Input.GetAxis("Horizontal") != 0) {
+        m_PushedSeconds += Time.deltaTime;
+      } else {
+        m_PushedSeconds = 0;
+      }
+      if (m_PushedSeconds >= m_PushSecondsToTrigger) {
+        m_PushedSeconds = 0;
+        DoScriptedMove(m_Player);
+      }
+    }
+  }
+
+  private void DoScriptedMove(PlayerPlatformerController player) {
+    m_StoppingCollider.enabled = false;
+    if (m_IsThroughHidden) {
+      player.FlipHiddenPassageLayer(true, -1);
+    }
+    player.ScriptedMoveToPoint(m_TargetPoint, () => {
+      player.FlipHiddenPassageLayer(false);
+    });
+  }
+
   void OnTriggerEnter2D(Collider2D collider) {
     if (collider.tag == "Player") {
-      PlayerPlatformerController player = 
-        collider.gameObject.GetComponent<PlayerPlatformerController>() 
-          as PlayerPlatformerController;
-      if (m_IsThroughHidden) {
-        player.FlipHiddenPassageLayer(true, -1);
-      }
-      player.ScriptedMoveToPoint(m_TargetPoint, () => {
-        player.FlipHiddenPassageLayer(false);
-      });
+      m_Player = collider.gameObject.GetComponent<PlayerPlatformerController>() 
+                    as PlayerPlatformerController;
+      m_IsTouching = true;
+    }
+  }
+
+  void OnTriggerExit2D(Collider2D collider) {
+    if (collider.tag == "Player") {
+      m_IsTouching = false;
+      m_Player = null;
+      m_PushedSeconds = 0;
+      m_StoppingCollider.enabled = true;
     }
   }
 
