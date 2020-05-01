@@ -34,5 +34,9 @@ public class SceneObtainableItem : MonoBehaviour
   }
 
   public string ItemId { get { return m_ItemId; } }
+  public string Name { get { return m_ItemName; } }
+  public Sprite ItemSprite { get { return m_ItemSprite; } }
+  public string ItemSpriteAssetPath { get { return m_ItemSpriteAssetPath; } }
+  public string ItemPrefabAssetPath { get { return m_PrefabAssetPath; } }
   public Collider2D ItemCollider { get { return m_Collider; } }
 }

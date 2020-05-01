@@ -17,17 +17,46 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 1d056a237e43ccd5b9d8acc8a1c0a2c1
   m_SerializeEntries:
+  - m_GUID: 051c0c16080555b44aacadd9629ce819
+    m_Address: Assets/Prefabs/SceneObtainableItems/CombinedItem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: 36cbcb6b808b2ba48a5e2a6fd592cac0
-    m_Address: Assets/Sprites/Item02.png
+    m_Address: Assets/Sprites/Level1Sprites/Items/Item02.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 4ec1ca026b8f13d4e954207d1e270823
+    m_Address: Assets/Sprites/Level1Sprites/Items/Item05.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 54af66b09cca23248b42b4e8366b481c
+    m_Address: Assets/Prefabs/SceneObtainableItems/Item04.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 733f1fc97afe7464fb6f08d07bfc34a5
     m_Address: Assets/Prefabs/SceneObtainableItems/Item02.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 82fa665f0e2416d4ebd8ae8b741e1815
+    m_Address: Assets/Prefabs/SceneObtainableItems/Item05.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 8de11407014fc8d4ba3770b95c33aad8
+    m_Address: Assets/Sprites/Level1Sprites/Items/Item04.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 8f9da819cd1c42745b4799ff09261ed5
     m_Address: Assets/Prefabs/SceneObtainableItems/Item01.prefab
@@ -36,7 +65,7 @@ MonoBehaviour:
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: bdce4a95fd2d61e4981a3e164366c908
-    m_Address: Assets/Sprites/Item01.png
+    m_Address: Assets/Sprites/Level1Sprites/Items/Item01.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -46,6 +75,24 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: d83c02425487f6349ab261b2ddcc7438
+    m_Address: Assets/Sprites/Level1Sprites/Items/Item03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: d9c7f0fe02e76874a9767bb7fe89bee7
+    m_Address: Assets/Prefabs/SceneObtainableItems/Item03.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: f4686ba5212383148bde8c287abf7452
+    m_Address: Assets/Sprites/Level1Sprites/Items/CombinedItems.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7c5c64230a21c05548da17842848f653, type: 2}

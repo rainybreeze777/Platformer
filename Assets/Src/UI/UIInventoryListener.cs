@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class UIInventoryListener : MonoBehaviour {
 
+  public AssetReference m_UIImageAsset;
+
   private PlayerManager m_PlayerManager;
   private EventManager m_EventManager;
-  // For Callbacks, watch out for thread synchronization
-  // TODO: Get a lock maybe? Or a queue of some kind, to avoid
-  // overwrites
-  private InvtItem m_CacheItem;
   // Dictionary to store quick UI object look up
   // Key: ItemId
   // Value: UIImage
   private Dictionary<string, UIImage> m_ItemsDict;
+
+  private UIImage m_UIImage;
 
   void Awake() {
     m_ItemsDict = new Dictionary<string, UIImage>();
@@ -31,21 +31,20 @@ public class UIInventoryListener : MonoBehaviour {
     foreach (var item in m_PlayerManager.AllItems) {
       OnObtainItem(item);
     }
+
+    m_UIImageAsset.LoadAssetAsync<GameObject>().Completed += (asyncRes) => {
+      m_UIImage = asyncRes.Result.GetComponent<UIImage>();
+    };
   }
 
   public void OnObtainItem(InvtItem item) {
-    m_CacheItem = item;
-    Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/UI/UIImage.prefab")
-                .Completed += (asyncRes) => {
-      UIImage imageObj = Instantiate(asyncRes.Result
-                                     , new Vector3(0, 0, 0)
-                                     , Quaternion.identity)
-                            .GetComponent<UIImage>() as UIImage;
-      imageObj.Init(m_PlayerManager, m_CacheItem.Id, m_CacheItem.Sprite);
-      imageObj.transform.SetParent(gameObject.transform);
-      m_ItemsDict[item.Id] = imageObj;
-      m_CacheItem = null;
-    };
+    UIImage imageObj = Instantiate(m_UIImage
+                               , new Vector3(0, 0, 0)
+                               , Quaternion.identity)
+                      .GetComponent<UIImage>() as UIImage;
+    imageObj.Init(m_PlayerManager, item.Id, item.Sprite);
+    imageObj.transform.SetParent(gameObject.transform);
+    m_ItemsDict[item.Id] = imageObj;
   }
 
   public void OnSpendingItem(InvtItem item) {

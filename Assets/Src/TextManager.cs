@@ -61,6 +61,24 @@ public class TextManager : MonoBehaviour
     };
   }
 
+  public int GetNumberOfTriggerLines(string triggerTag) {
+    if (!m_Triggers.ContainsKey(triggerTag)) {
+      Debug.LogError("Unable to find trigger with tag " + triggerTag);
+      return -1;
+    }
+    return m_Triggers[triggerTag].Count;
+  }
+
+  public ActorLine GetTriggerLine(string triggerTag, int lineIndex) {
+    DialogueLine oneLine = m_Triggers[triggerTag][lineIndex];
+    Actor speaker = m_Actors[oneLine.SpeakerTag];
+    return new ActorLine {
+      ActorName = speaker.Name,
+      ActorSprite = speaker.Sprite,
+      LineText = oneLine.LineText
+    };
+  }
+
   private List<DialogueLine> GetDialogueLinesInternal(
                               string targetCharTag
                               , EConversationType convoType) {

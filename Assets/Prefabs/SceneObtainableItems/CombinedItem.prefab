@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8619408764227955527
+--- !u!1001 &482445037492343794
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3030042452895166567, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_Name
-      value: Item02
+      value: CombinedItem
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166563, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
@@ -70,49 +70,49 @@ PrefabInstance:
     - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_ItemName
-      value: Item 2
+      value: Combined Item
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_ItemId
-      value: item02
+      value: combinedItem
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_ItemSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 36cbcb6b808b2ba48a5e2a6fd592cac0,
+      objectReference: {fileID: 21300000, guid: 8f0507b3db32bde4e9822c79fcbae395,
         type: 3}
     - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_ItemSpriteAssetPath
-      value: Assets/Sprites/Level1Sprites/Items/Item02.png
+      value: Assets/Sprites/Level1Sprites/Items/Item06.png
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_SceneObtainablePrefab
       value: 
-      objectReference: {fileID: 6742615509127748385}
+      objectReference: {fileID: 3223771090531312532}
     - target: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_PrefabAssetPath
-      value: Assets/Prefabs/SceneObtainableItems/Item02.prefab
+      value: Assets/Prefabs/SceneObtainableItems/CombinedItem.prefab
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 36cbcb6b808b2ba48a5e2a6fd592cac0,
+      objectReference: {fileID: 21300000, guid: 8f0507b3db32bde4e9822c79fcbae395,
         type: 3}
     - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_Size.x
-      value: 3.51
+      value: 7.15
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_Size.y
-      value: 3.07
+      value: 7.15
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166560, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
@@ -142,12 +142,12 @@ PrefabInstance:
     - target: {fileID: 3030042452895166561, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 3.51
+      value: 7.15
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166561, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3.07
+      value: 7.15
       objectReference: {fileID: 0}
     - target: {fileID: 3030042452895166561, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
         type: 3}
@@ -156,11 +156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f14d44b718a979843aa3ed5e8bf0b9b7, type: 3}
---- !u!114 &6742615509127748385 stripped
+--- !u!114 &3223771090531312532 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3030042452895166566, guid: f14d44b718a979843aa3ed5e8bf0b9b7,
     type: 3}
-  m_PrefabInstance: {fileID: 8619408764227955527}
+  m_PrefabInstance: {fileID: 482445037492343794}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
