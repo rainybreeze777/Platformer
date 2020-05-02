@@ -8,6 +8,7 @@ public class PlayMovieAtStart : MonoBehaviour
 {
   public VideoPlayer m_StartMovie;
   public MovieController m_MovieController;
+  public AudioManager m_AudioManager;
 
   private SceneLoader m_SceneLoader;
 
@@ -20,7 +21,9 @@ public class PlayMovieAtStart : MonoBehaviour
     m_SceneLoader = GameObject.Find("/SceneLoader")
                               .GetComponent<SceneLoader>() as SceneLoader;
     if (!m_SceneLoader.IsReloadedScene) {
-      m_MovieController.PlayMovie(m_StartMovie, null, null);
+      m_MovieController.PlayMovie(m_StartMovie, null, () => {
+        m_AudioManager.PlayBgm(true, true);
+      });
     }
   }
 }

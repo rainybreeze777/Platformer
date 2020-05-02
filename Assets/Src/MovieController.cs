@@ -34,10 +34,13 @@ public class MovieController : MonoBehaviour
     }
   }
 
+  public bool IsMoviePlaying { 
+    get { return m_PlayStatus != null ? m_PlayStatus.IsMoviePlaying : false; } }
+
   private class MoviePlayStatus {
     public bool IsAllBlack { get; private set; } = false;
     public bool IsMovieReady { get; private set; } = false;
-
+    public bool IsMoviePlaying { get { return m_MoviePlaying; } }
     public Action m_OnMovieStart;
 
     private float m_StartFadeInBlackSeconds;
