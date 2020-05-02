@@ -8,6 +8,7 @@ using Input = Platformer.Input;
 public class ScriptedMoveTrigger : MonoBehaviour
 {
   public bool m_IsThroughHidden;
+  public int m_HiddenSortingLayer = -1;
   public float m_PushSecondsToTrigger = 0.5f;
   public Collider2D m_StoppingCollider;
 
@@ -49,7 +50,7 @@ public class ScriptedMoveTrigger : MonoBehaviour
   private void DoScriptedMove(PlayerPlatformerController player) {
     m_StoppingCollider.enabled = false;
     if (m_IsThroughHidden) {
-      player.FlipHiddenPassageLayer(true, -1);
+      player.FlipHiddenPassageLayer(true, m_HiddenSortingLayer);
     }
     player.ScriptedMoveToPoint(m_TargetPoint, () => {
       player.FlipHiddenPassageLayer(false);

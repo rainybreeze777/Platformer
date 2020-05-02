@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
+[RequireComponent(typeof(Rigidbody2D))]
 public class ToggleMoveObject : Toggleable, ISceneMovable {
 
   public float m_Speed = 1f;
