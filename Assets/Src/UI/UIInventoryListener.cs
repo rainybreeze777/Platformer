@@ -28,9 +28,7 @@ public class UIInventoryListener : MonoBehaviour {
                                 .GetComponent<PlayerManager>() as PlayerManager;
     m_EventManager.AddListener<ObtainItemUEvent, InvtItem>(OnObtainItem);
     m_EventManager.AddListener<SpendItemUEvent, InvtItem>(OnSpendingItem);
-    foreach (var item in m_PlayerManager.AllItems) {
-      OnObtainItem(item);
-    }
+    m_EventManager.AddListener<PlayerSpawnedUEvent>(OnPlayerSpawn);
 
     m_UIImageAsset.LoadAssetAsync<GameObject>().Completed += (asyncRes) => {
       m_UIImage = asyncRes.Result.GetComponent<UIImage>();
@@ -52,5 +50,15 @@ public class UIInventoryListener : MonoBehaviour {
     UIImage uiImage = m_ItemsDict[item.Id];
     m_ItemsDict.Remove(item.Id);
     Destroy(uiImage.gameObject);
+  }
+
+  private void OnPlayerSpawn() {
+    foreach (var kvp in m_ItemsDict) {
+      Destroy(kvp.Value.gameObject);
+    }
+    m_ItemsDict.Clear();
+    foreach (var item in m_PlayerManager.AllItems) {
+      OnObtainItem(item);
+    }
   }
 }
