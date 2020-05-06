@@ -563,12 +563,12 @@ PrefabInstance:
     - target: {fileID: 7849617632332576198, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.371855
+      value: 7.2518554
       objectReference: {fileID: 0}
     - target: {fileID: 7849617632332576198, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.619947
+      value: 10.949947
       objectReference: {fileID: 0}
     - target: {fileID: 7849617632332576198, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
@@ -4961,7 +4961,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1974761365
   m_SortingLayer: -1
-  m_SortingOrder: -4
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: ee734515c72a53240bc434419e2aa414, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4993,12 +4993,12 @@ PrefabInstance:
     - target: {fileID: 1081054369402067398, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29
+      value: 4.88
       objectReference: {fileID: 0}
     - target: {fileID: 1081054369402067398, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.93
+      value: 9.26
       objectReference: {fileID: 0}
     - target: {fileID: 1081054369402067398, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
@@ -6306,7 +6306,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1974761365
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 1facd72f0ecf62c4d9df429711f6f2f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11621,8 +11621,8 @@ PolygonCollider2D:
       - {x: 23.095938, y: -2.0094843}
       - {x: 43.75447, y: -2.104248}
       - {x: 43.73939, y: 18.896015}
-      - {x: 0.3581462, y: 19.741096}
-      - {x: 0.0030184984, y: 9.910748}
+      - {x: 0.7511066, y: 19.725983}
+      - {x: 0.2146126, y: 9.895634}
       - {x: 0.08194566, y: 1.3041191}
       - {x: -0.9901147, y: -1.6987469}
 --- !u!1 &1712339476
