@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
 {
-  public float m_MinGroundNormalY = .65f;
+  public float m_MinGroundNormalY = .75f;
   public float m_GravityModifier = 1f;
 
   public float m_DebugRayLength = 1f;
@@ -18,7 +18,7 @@ public class PhysicsObject : MonoBehaviour
   protected RaycastHit2D[] m_HitBuffer = new RaycastHit2D[16];
   protected List<RaycastHit2D> m_ActualHitList = new List<RaycastHit2D>(16);
 
-  protected const float m_MinMoveDistance = 0.001f;
+  protected const float m_MinMoveDistance = 0.0001f;
   protected const float m_ShellRadius = 0.01f;
 
   protected float m_SettedGravityModifier;
@@ -65,21 +65,21 @@ public class PhysicsObject : MonoBehaviour
     // Rotation of 90 degrees of ground normal, parallel to ground
     Vector2 moveAlongGround = new Vector2(m_GroundNormal.y, -m_GroundNormal.x);
 
-    Debug.DrawRay(gameObject.transform.position
-                  , new Vector3(moveAlongGround.x, moveAlongGround.y, 0)
-                  , Color.cyan);
+    // Debug.DrawRay(gameObject.transform.position
+    //               , new Vector3(moveAlongGround.x, moveAlongGround.y, 0)
+    //               , Color.cyan);
 
     Vector2 move = moveAlongGround * deltaPosition.x;
-    Debug.DrawRay(gameObject.transform.position
-                  , new Vector3(move.x, move.y, 0) * m_DebugRayLength
-                  , Color.red);
+    // Debug.DrawRay(gameObject.transform.position
+    //               , new Vector3(move.x, move.y, 0) * m_DebugRayLength
+    //               , Color.red);
 
     Movement(move, false, extraMoving);
 
     move = Vector2.up * deltaPosition.y;
-    Debug.DrawRay(gameObject.transform.position
-                  , new Vector3(move.x, move.y, 0) * m_DebugRayLength
-                  , Color.green);
+    // Debug.DrawRay(gameObject.transform.position
+    //               , new Vector3(move.x, move.y, 0) * m_DebugRayLength
+    //               , Color.green);
 
     Movement(move, true, extraMoving);
     Vector2 externalVelocities = Vector2.zero;
@@ -121,9 +121,11 @@ public class PhysicsObject : MonoBehaviour
       for (int i = 0; i < m_ActualHitList.Count; i++) {
         var hit = m_ActualHitList[i];
 
+        bool isHitGround = false;
         Vector2 currentNormal = hit.normal;
         if (currentNormal.y > m_MinGroundNormalY) {
           m_Grounded = true;
+          isHitGround = true;
           if (yMovement) {
             m_GroundNormal = currentNormal;
             currentNormal.x = 0;
@@ -131,8 +133,11 @@ public class PhysicsObject : MonoBehaviour
         }
 
         float projection = Vector2.Dot(m_Velocity, currentNormal);
-        if (projection < 0) {
+        if ((isHitGround || currentNormal.y <= 0.01f) && projection < 0) {
           m_Velocity = m_Velocity - projection * currentNormal;
+          Debug.DrawRay(gameObject.transform.position
+              , new Vector3(m_Velocity.x, m_Velocity.y, 0)
+              , Color.red);
         }
 
         ISceneMovable movable = hit.transform.GetComponent<ISceneMovable>() as ISceneMovable;
