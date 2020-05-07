@@ -7,8 +7,8 @@ using Input = Platformer.Input;
 
 public class PlayerPlatformerController : PhysicsObject {
 
-  public float maxSpeed = 7;
-  public float jumpTakeOffSpeed = 7;
+  public float m_MaxSpeed = 7;
+  public float m_JumpTakeOffSpeed = 7;
 
   public float m_FallDeathThreshold = 10f;
   public float m_DropItemDistance = 1.0f;
@@ -25,8 +25,8 @@ public class PlayerPlatformerController : PhysicsObject {
   private EventManager m_EventManager;
   private PlayerManager m_PlayerManager;
 
-  private bool isClimbing = false;
-  private bool isDucking = false;
+  private bool m_IsClimbing = false;
+  private bool m_IsDucking = false;
   private float m_FallDist = 0;
   private int m_OriginalSortingOrder;
   private Vector3 m_Facing;
@@ -57,9 +57,9 @@ public class PlayerPlatformerController : PhysicsObject {
                 : LayerMask.NameToLayer("Player");
     int sortingOrder = toHidden ? targetSortingLayer : m_OriginalSortingOrder;
     gameObject.layer = layer;
-    contactFilter.useTriggers = false;
-    contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(layer));
-    contactFilter.useLayerMask = true;
+    m_ContactFilter.useTriggers = false;
+    m_ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(layer));
+    m_ContactFilter.useLayerMask = true;
     spriteRenderer.sortingOrder = sortingOrder;
   }
 
@@ -67,7 +67,7 @@ public class PlayerPlatformerController : PhysicsObject {
     ForcedMove = true;
     m_ScriptedTargetPos = pos;
     m_OnForceMoveArrive = onForceMoveArrive;
-    Vector3 rb2dPos = rb2d.position;
+    Vector3 rb2dPos = m_Rb2d.position;
     Vector3 moveDirection = pos - rb2dPos;
     moveDirection.y = moveDirection.z = 0;
     m_Facing = moveDirection.normalized;
@@ -78,30 +78,30 @@ public class PlayerPlatformerController : PhysicsObject {
 
     move.x = Input.GetAxis("Horizontal");
 
-    if (Input.GetButton("Vertical") && isClimbing) {
-      velocity.y = Input.GetAxis("Vertical") * maxSpeed;
-    } else if (Input.GetButtonUp("Vertical") && isClimbing) {
-      velocity = Vector2.zero;
-    } else if (Input.GetButtonDown("Jump") && grounded) {
-      if (!isDucking) {
-        velocity.y = jumpTakeOffSpeed;
+    if (Input.GetButton("Vertical") && m_IsClimbing) {
+      m_Velocity.y = Input.GetAxis("Vertical") * m_MaxSpeed;
+    } else if (Input.GetButtonUp("Vertical") && m_IsClimbing) {
+      m_Velocity = Vector2.zero;
+    } else if (Input.GetButtonDown("Jump") && m_Grounded) {
+      if (!m_IsDucking) {
+        m_Velocity.y = m_JumpTakeOffSpeed;
       }
       m_EventManager.Invoke<JumpUEvent>();
     } else if (Input.GetButtonUp("Jump")) {
-      if (velocity.y > 0) {
-        velocity.y = velocity.y * 0.5f;
+      if (m_Velocity.y > 0) {
+        m_Velocity.y = m_Velocity.y * 0.5f;
       }
       m_EventManager.Invoke<JumpReleaseUEvent>();
     }
 
-    if (Input.GetButton("Duck") && grounded) {
-      if (!isDucking) {
+    if (Input.GetButton("Duck") && m_Grounded) {
+      if (!m_IsDucking) {
         m_EventManager.Invoke<DuckingUEvent, bool>(true);
       }
-      isDucking = true;
-    } else if (grounded && isDucking) {
+      m_IsDucking = true;
+    } else if (m_Grounded && m_IsDucking) {
       m_EventManager.Invoke<DuckingUEvent, bool>(false);
-      isDucking = false;
+      m_IsDucking = false;
     }
 
     if (move.x > 0.01f) { m_Facing = new Vector3(1, 0, 0); }
@@ -113,27 +113,27 @@ public class PlayerPlatformerController : PhysicsObject {
       spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 
-    // animator.SetBool("grounded", grounded);
-    // animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+    // animator.SetBool("grounded", m_Grounded);
+    // animator.SetFloat("velocityX", Mathf.Abs(m_Velocity.x) / m_MaxSpeed);
 
-    targetVelocity = move * maxSpeed;
+    m_TargetVelocity = move * m_MaxSpeed;
     Debug.DrawRay(gameObject.transform.position
-                  , ThrowVector * debugRayLength
+                  , ThrowVector * m_DebugRayLength
                   , Color.white);
   }
 
   protected override void ComputeForcedMoveVelocity() {
     Vector2 move = Vector2.zero;
-    Vector3 rb2dPos = rb2d.position;
+    Vector3 rb2dPos = m_Rb2d.position;
     if (Vector3.Dot((rb2dPos - m_ScriptedTargetPos), m_Facing) > 0) {
-      targetVelocity = Vector2.zero;
+      m_TargetVelocity = Vector2.zero;
       ForcedMove = false;
       m_ScriptedTargetPos = Vector3.zero;
       m_OnForceMoveArrive?.Invoke();
       m_OnForceMoveArrive = null;
     } else {
-      move.x = m_ScriptedTargetPos.x > rb2d.position.x ? 1 : -1;
-      targetVelocity = move * maxSpeed;
+      move.x = m_ScriptedTargetPos.x > m_Rb2d.position.x ? 1 : -1;
+      m_TargetVelocity = move * m_MaxSpeed;
     }
   }
 
@@ -151,17 +151,17 @@ public class PlayerPlatformerController : PhysicsObject {
 
   void OnTriggerEnter2D(Collider2D c) {
       if (c.transform.tag == "Climbable" && Input.GetButton("Jump")) {
-          isClimbing = true;
-          rb2d.gravityScale = 0;
-          gravityModifier = 0;
+        m_IsClimbing = true;
+        m_Rb2d.gravityScale = 0;
+        m_GravityModifier = 0;
       }
   }
 
   void OnTriggerExit2D(Collider2D c) {
     if (c.transform.tag == "Climbable") {
-      isClimbing = false;
-      rb2d.gravityScale = 1;
-      gravityModifier = settedGravityModifier;
+      m_IsClimbing = false;
+      m_Rb2d.gravityScale = 1;
+      m_GravityModifier = m_SettedGravityModifier;
     }
   }
 
@@ -170,7 +170,7 @@ public class PlayerPlatformerController : PhysicsObject {
   }
 
   bool IsDucking {
-    get { return isDucking; }
+    get { return m_IsDucking; }
   }
 
   public bool SpawnAtSpawnPoint { get { return m_SpawnAtSpawnPoint; } }

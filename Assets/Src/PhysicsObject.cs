@@ -4,40 +4,40 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
 {
-  public float minGroundNormalY = .65f;
-  public float gravityModifier;
+  public float m_MinGroundNormalY = .65f;
+  public float m_GravityModifier = 1f;
 
-  public float debugRayLength = 1f;
+  public float m_DebugRayLength = 1f;
 
-  protected Vector2 targetVelocity;
-  protected bool grounded;
-  protected Vector2 groundNormal;
-  protected Rigidbody2D rb2d;
-  protected Vector2 velocity;
-  protected ContactFilter2D contactFilter;
-  protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
-  protected List<RaycastHit2D> actualHitList = new List<RaycastHit2D>(16);
+  protected Vector2 m_TargetVelocity;
+  protected bool m_Grounded;
+  protected Vector2 m_GroundNormal;
+  protected Rigidbody2D m_Rb2d;
+  protected Vector2 m_Velocity;
+  protected ContactFilter2D m_ContactFilter;
+  protected RaycastHit2D[] m_HitBuffer = new RaycastHit2D[16];
+  protected List<RaycastHit2D> m_ActualHitList = new List<RaycastHit2D>(16);
 
-  protected const float minMoveDistance = 0.001f;
-  protected const float shellRadius = 0.01f;
+  protected const float m_MinMoveDistance = 0.001f;
+  protected const float m_ShellRadius = 0.01f;
 
-  protected float settedGravityModifier;
+  protected float m_SettedGravityModifier;
 
   private bool m_ForcedMove = false;
 
   void OnEnable() {
-    rb2d = GetComponent<Rigidbody2D>();
-    settedGravityModifier = gravityModifier;
+    m_Rb2d = GetComponent<Rigidbody2D>();
+    m_SettedGravityModifier = m_GravityModifier;
   }
 
   void Start() {
-    contactFilter.useTriggers = false;
-    contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
-    contactFilter.useLayerMask = true;
+    m_ContactFilter.useTriggers = false;
+    m_ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+    m_ContactFilter.useLayerMask = true;
   }
 
   void Update() {
-    targetVelocity = Vector2.zero;
+    m_TargetVelocity = Vector2.zero;
     if (ForcedMove) {
       ComputeForcedMoveVelocity();
     } else {
@@ -53,16 +53,17 @@ public class PhysicsObject : MonoBehaviour
   private bool m_PrevGrounded = true;
 
   void FixedUpdate() {
-    velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
-    velocity.x = targetVelocity.x;
+    m_Velocity += m_GravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
+    m_Velocity.x = m_TargetVelocity.x;
 
-    grounded = false;
+    m_Grounded = false;
 
     var extraMoving = new List<ISceneMovable>();
 
-    Vector2 deltaPosition = velocity * Time.fixedDeltaTime;
+    Vector2 deltaPosition = m_Velocity * Time.fixedDeltaTime;
 
-    Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+    // Rotation of 90 degrees of ground normal, parallel to ground
+    Vector2 moveAlongGround = new Vector2(m_GroundNormal.y, -m_GroundNormal.x);
 
     Debug.DrawRay(gameObject.transform.position
                   , new Vector3(moveAlongGround.x, moveAlongGround.y, 0)
@@ -70,14 +71,14 @@ public class PhysicsObject : MonoBehaviour
 
     Vector2 move = moveAlongGround * deltaPosition.x;
     Debug.DrawRay(gameObject.transform.position
-                  , new Vector3(move.x, move.y, 0) * debugRayLength
+                  , new Vector3(move.x, move.y, 0) * m_DebugRayLength
                   , Color.red);
 
     Movement(move, false, extraMoving);
 
     move = Vector2.up * deltaPosition.y;
     Debug.DrawRay(gameObject.transform.position
-                  , new Vector3(move.x, move.y, 0) * debugRayLength
+                  , new Vector3(move.x, move.y, 0) * m_DebugRayLength
                   , Color.green);
 
     Movement(move, true, extraMoving);
@@ -85,53 +86,53 @@ public class PhysicsObject : MonoBehaviour
     foreach (ISceneMovable movingObj in extraMoving) {
       externalVelocities += movingObj.Velocity;
     }
-    rb2d.position += externalVelocities * Time.fixedDeltaTime;
+    m_Rb2d.position += externalVelocities * Time.fixedDeltaTime;
 
-    if (grounded && !m_PrevGrounded) {
+    if (m_Grounded && !m_PrevGrounded) {
       Landed();
     }
-    m_PrevGrounded = grounded;
+    m_PrevGrounded = m_Grounded;
   }
 
   void Movement(Vector2 move, bool yMovement, List<ISceneMovable> additionalObjects) {
     float distance = move.magnitude;
 
-    if (distance > minMoveDistance) {
-      int count = rb2d.Cast(move, contactFilter, hitBuffer
-                            , distance + shellRadius);
-      actualHitList.Clear();
+    if (distance > m_MinMoveDistance) {
+      int count = m_Rb2d.Cast(move, m_ContactFilter, m_HitBuffer
+                            , distance + m_ShellRadius);
+      m_ActualHitList.Clear();
 
       // Figure out if object actually hit something
       for (int i = 0; i < count; i++) {
-        Debug.DrawRay(hitBuffer[i].point, hitBuffer[i].normal);
-        PlatformEffector2D effector = hitBuffer[i].collider
+        Debug.DrawRay(m_HitBuffer[i].point, m_HitBuffer[i].normal);
+        PlatformEffector2D effector = m_HitBuffer[i].collider
                                         .GetComponent<PlatformEffector2D>();
         if (effector && effector.useOneWay) {
-          Vector2 hitNormal = hitBuffer[i].normal;
+          Vector2 hitNormal = m_HitBuffer[i].normal;
           // TODO: Why does checking move here works, but checking velocity fails?
           if (Vector2.Dot(move, hitNormal) > -0.000001
               || !EffectorHelpers.IsTopEffective(effector, hitNormal)) {
             continue; 
           }
         }
-        actualHitList.Add(hitBuffer[i]);
+        m_ActualHitList.Add(m_HitBuffer[i]);
       }
 
-      for (int i = 0; i < actualHitList.Count; i++) {
-        var hit = actualHitList[i];
+      for (int i = 0; i < m_ActualHitList.Count; i++) {
+        var hit = m_ActualHitList[i];
 
         Vector2 currentNormal = hit.normal;
-        if (currentNormal.y > minGroundNormalY) {
-          grounded = true;
+        if (currentNormal.y > m_MinGroundNormalY) {
+          m_Grounded = true;
           if (yMovement) {
-            groundNormal = currentNormal;
+            m_GroundNormal = currentNormal;
             currentNormal.x = 0;
           }
         }
 
-        float projection = Vector2.Dot(velocity, currentNormal);
+        float projection = Vector2.Dot(m_Velocity, currentNormal);
         if (projection < 0) {
-          velocity = velocity - projection * currentNormal;
+          m_Velocity = m_Velocity - projection * currentNormal;
         }
 
         ISceneMovable movable = hit.transform.GetComponent<ISceneMovable>() as ISceneMovable;
@@ -139,17 +140,17 @@ public class PhysicsObject : MonoBehaviour
           additionalObjects.Add(movable);
         }
 
-        float modifiedDistance = hit.distance - shellRadius;
+        float modifiedDistance = hit.distance - m_ShellRadius;
         distance = modifiedDistance < distance ? modifiedDistance : distance;
       }
 
-      if (yMovement && !grounded && Vector2.Dot(move, Vector2.down) > -0.000001)
+      if (yMovement && !m_Grounded && Vector2.Dot(move, Vector2.down) > -0.000001)
       {
         FallDistance(distance);
       }
     }
 
-    rb2d.position = rb2d.position + move.normalized * distance;
+    m_Rb2d.position = m_Rb2d.position + move.normalized * distance;
   }
 
   public bool ForcedMove {
