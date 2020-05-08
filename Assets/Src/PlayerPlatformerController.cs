@@ -131,8 +131,6 @@ public class PlayerPlatformerController : PhysicsObject {
       m_IsSlipping = false;
     }
 
-    // Debug.Log(m_TargetVelocity.ToString("F5"));
-
     m_PrevMove = move;
 
     Debug.DrawRay(gameObject.transform.position

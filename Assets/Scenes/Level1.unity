@@ -9068,7 +9068,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1358031448}
   - component: {fileID: 1358031447}
-  - component: {fileID: 1358031449}
   m_Layer: 0
   m_Name: TopPlankRoad02
   m_TagString: Untagged
@@ -9139,32 +9138,6 @@ Transform:
   m_Father: {fileID: 1733912234}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1358031449
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358031446}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -5.8340664}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.43, y: 12.08}
-    newSize: {x: 12.31, y: 4.71}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 12.31, y: 0.4088211}
-  m_EdgeRadius: 0
 --- !u!1 &1371811967
 GameObject:
   m_ObjectHideFlags: 0
@@ -9907,7 +9880,7 @@ PolygonCollider2D:
       - {x: -10.786458, y: -6.1258364}
       - {x: -11.719305, y: -5.8914766}
       - {x: -12.516786, y: -5.8883257}
-      - {x: -12.85393, y: -5.500514}
+      - {x: -12.955469, y: -5.8879185}
       - {x: -12.93657, y: -4.350036}
       - {x: -12.599638, y: -4.185194}
       - {x: -12.158249, y: -4.202912}
@@ -9935,11 +9908,7 @@ PolygonCollider2D:
     - - {x: 3.0412235, y: -6.442342}
       - {x: 2.5854359, y: -6.4849744}
       - {x: 1.6538887, y: -6.542984}
-      - {x: 1.5782337, y: -6.4819794}
       - {x: 1.2239227, y: -6.518877}
-      - {x: 0.6118126, y: -6.337463}
-      - {x: 0.47440147, y: -6.2694016}
-      - {x: 0.29411888, y: -6.321175}
       - {x: -0.17238426, y: -6.378318}
       - {x: -0.9275093, y: -6.3690767}
       - {x: -0.95409584, y: -5.3509808}
@@ -9950,7 +9919,6 @@ PolygonCollider2D:
       - {x: -0.6032791, y: -2.558628}
       - {x: -1.0647945, y: -2.7088876}
       - {x: -1.9969101, y: -2.7643394}
-      - {x: -2.2442188, y: -2.6776395}
       - {x: -2.4054413, y: -2.787888}
       - {x: -4.6864395, y: -2.8668652}
       - {x: -4.6849422, y: -1.696877}
@@ -9963,8 +9931,7 @@ PolygonCollider2D:
       - {x: 0.29263496, y: -1.9722404}
       - {x: 0.19835472, y: -2.053031}
       - {x: 0.49554443, y: -2.9127455}
-      - {x: 0.3370304, y: -3.8751764}
-      - {x: 0.74554634, y: -4.130877}
+      - {x: 0.48069763, y: -3.9110665}
       - {x: 1.4026699, y: -3.8973494}
       - {x: 2.8866863, y: -3.9102173}
       - {x: 3.2251835, y: -4.1323767}
@@ -11905,6 +11872,8 @@ GameObject:
   - component: {fileID: 1733912234}
   - component: {fileID: 1733912235}
   - component: {fileID: 1733912236}
+  - component: {fileID: 1733912238}
+  - component: {fileID: 1733912237}
   m_Layer: 0
   m_Name: TopPlanks
   m_TagString: Untagged
@@ -11964,6 +11933,58 @@ MonoBehaviour:
   m_Speed: 1
   m_LocalPos1: {x: 23.15, y: 25.903}
   m_LocalPos2: {x: 23.15, y: 24.05}
+--- !u!61 &1733912237
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733912233}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.004339218, y: -5.9226017}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.426235, y: 0.533062}
+  m_EdgeRadius: 0
+--- !u!61 &1733912238
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733912233}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.8145075, y: -4.1587763}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.440378, y: 0.5114498}
+  m_EdgeRadius: 0
 --- !u!1 &1737282519
 GameObject:
   m_ObjectHideFlags: 0
@@ -12402,7 +12423,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1794441737}
   - component: {fileID: 1794441736}
-  - component: {fileID: 1794441738}
   m_Layer: 0
   m_Name: TopPlankRoad01
   m_TagString: Untagged
@@ -12474,32 +12494,6 @@ Transform:
   m_Father: {fileID: 1733912234}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1794441738
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794441735}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00024986267, y: -6.000519}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.43, y: 12.38}
-    newSize: {x: 12.43, y: 12.38}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 12.428986, y: 0.37573624}
-  m_EdgeRadius: 0
 --- !u!1 &1816774287
 GameObject:
   m_ObjectHideFlags: 0

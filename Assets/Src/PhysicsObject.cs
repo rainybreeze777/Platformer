@@ -91,16 +91,13 @@ public class PhysicsObject : MonoBehaviour
     foreach (ISceneMovable movingObj in extraMoving) {
       externalVelocities += movingObj.Velocity;
     }
+    m_Velocity += externalVelocities;
     m_Rb2d.position += externalVelocities * Time.fixedDeltaTime;
 
     if (m_Grounded && !m_PrevGrounded) {
       Landed();
     }
     m_PrevGrounded = m_Grounded;
-
-    Debug.DrawRay(gameObject.transform.position
-                  , m_Velocity * m_DebugRayLength
-                  , Color.magenta);
   }
 
   void Movement(Vector2 move, bool yMovement, List<ISceneMovable> additionalObjects) {
