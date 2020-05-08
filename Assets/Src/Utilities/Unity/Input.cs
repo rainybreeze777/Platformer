@@ -35,6 +35,12 @@ public class Input : UnityEngine.Input {
     }
   }
 
+  public static bool AnyKey {
+    get {
+      return s_AllowInput ? UnityEngine.Input.anyKey : false;
+    }
+  }
+
   public static bool GetActionButtonDownIgnoreAllowInput() {
     return UnityEngine.Input.GetButtonDown("Action");
   }

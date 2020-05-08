@@ -6,6 +6,7 @@ public class PhysicsObject : MonoBehaviour
 {
   public float m_MinGroundNormalY = .75f;
   public float m_GravityModifier = 1f;
+  public float m_SlipModifier = 1f;
 
   public float m_DebugRayLength = 1f;
 
@@ -14,6 +15,7 @@ public class PhysicsObject : MonoBehaviour
   protected Vector2 m_GroundNormal;
   protected Rigidbody2D m_Rb2d;
   protected Vector2 m_Velocity;
+  protected Vector2 m_SlipDirection;
   protected ContactFilter2D m_ContactFilter;
   protected RaycastHit2D[] m_HitBuffer = new RaycastHit2D[16];
   protected List<RaycastHit2D> m_ActualHitList = new List<RaycastHit2D>(16);
@@ -58,6 +60,8 @@ public class PhysicsObject : MonoBehaviour
 
     m_Grounded = false;
 
+    m_Rb2d.position += m_SlipDirection * m_SlipModifier * Time.fixedDeltaTime;
+
     var extraMoving = new List<ISceneMovable>();
 
     Vector2 deltaPosition = m_Velocity * Time.fixedDeltaTime;
@@ -73,6 +77,10 @@ public class PhysicsObject : MonoBehaviour
     // Debug.DrawRay(gameObject.transform.position
     //               , new Vector3(move.x, move.y, 0) * m_DebugRayLength
     //               , Color.red);
+
+    // if (m_SlipDirection != Vector2.zero) {
+    //   move = Vector2.zero;
+    // }
 
     Movement(move, false, extraMoving);
 
@@ -143,6 +151,15 @@ public class PhysicsObject : MonoBehaviour
         ISceneMovable movable = hit.transform.GetComponent<ISceneMovable>() as ISceneMovable;
         if (movable != null) {
           additionalObjects.Add(movable);
+        }
+
+        // When falling into some sloped surface that isn't ground, should
+        // start slipping
+        if (yMovement && !isHitGround && currentNormal.y > 0.01f) {
+          float rotateDegrees = currentNormal.x >= 0 ? 90.0f : 270.0f;
+          m_SlipDirection = VectorMath.RotateV2Degree(currentNormal, rotateDegrees);
+        } else {
+          m_SlipDirection = Vector2.zero;
         }
 
         float modifiedDistance = hit.distance - m_ShellRadius;

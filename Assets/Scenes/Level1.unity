@@ -563,12 +563,12 @@ PrefabInstance:
     - target: {fileID: 7849617632332576198, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.2518554
+      value: 10.926855
       objectReference: {fileID: 0}
     - target: {fileID: 7849617632332576198, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.949947
+      value: 14.724947
       objectReference: {fileID: 0}
     - target: {fileID: 7849617632332576198, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
@@ -4993,12 +4993,12 @@ PrefabInstance:
     - target: {fileID: 1081054369402067398, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.88
+      value: 8.555
       objectReference: {fileID: 0}
     - target: {fileID: 1081054369402067398, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.26
+      value: 13.035
       objectReference: {fileID: 0}
     - target: {fileID: 1081054369402067398, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
@@ -5065,20 +5065,40 @@ PrefabInstance:
       propertyPath: m_Fader
       value: 
       objectReference: {fileID: 458185640}
+    - target: {fileID: 1081054369402067393, guid: 3838fe80caf718146ab28a7e5f48e68f,
+        type: 3}
+      propertyPath: m_GravityModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081054369402067393, guid: 3838fe80caf718146ab28a7e5f48e68f,
+        type: 3}
+      propertyPath: m_MaxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081054369402067393, guid: 3838fe80caf718146ab28a7e5f48e68f,
+        type: 3}
+      propertyPath: m_JumpTakeOffSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081054369402067393, guid: 3838fe80caf718146ab28a7e5f48e68f,
+        type: 3}
+      propertyPath: m_MinGroundNormalY
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 1872273063838350327, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
       propertyPath: m_Offset.x
-      value: -0.0043945634
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1872273063838350327, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
       propertyPath: m_Offset.y
-      value: -0.049620517
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1872273063838350327, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.18779927
+      value: 0.44954228
       objectReference: {fileID: 0}
     - target: {fileID: 1872273063838350327, guid: 3838fe80caf718146ab28a7e5f48e68f,
         type: 3}
@@ -9995,7 +10015,7 @@ PolygonCollider2D:
       - {x: -9.449411, y: 3.2381477}
       - {x: -10.071653, y: 3.229498}
       - {x: -11.740755, y: 3.2286062}
-      - {x: -12.624119, y: 3.3640175}
+      - {x: -12.735191, y: 3.2434454}
       - {x: -13.026457, y: 3.7987614}
       - {x: -13.112587, y: 3.8033266}
       - {x: -13.195728, y: 3.2119951}

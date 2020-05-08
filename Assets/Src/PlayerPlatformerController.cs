@@ -27,10 +27,12 @@ public class PlayerPlatformerController : PhysicsObject {
 
   private bool m_IsClimbing = false;
   private bool m_IsDucking = false;
+  private bool m_IsSlipping = false;
   private float m_FallDist = 0;
   private int m_OriginalSortingOrder;
   private Vector3 m_Facing;
   private Vector3 m_ScriptedTargetPos;
+  private Vector2 m_PrevMove;
 
   private SpriteRenderer spriteRenderer;
   private Animator m_Animator;
@@ -48,6 +50,7 @@ public class PlayerPlatformerController : PhysicsObject {
     m_PlayerManager = GameObject.Find("/PlayerManager")
                                 .GetComponent<PlayerManager>() as PlayerManager;
     m_Facing = new Vector3(1, 0);
+    m_PrevMove = Vector2.zero;
     m_OriginalSortingOrder = spriteRenderer.sortingOrder;
   }
 
@@ -116,7 +119,24 @@ public class PlayerPlatformerController : PhysicsObject {
     // animator.SetBool("grounded", m_Grounded);
     // animator.SetFloat("velocityX", Mathf.Abs(m_Velocity.x) / m_MaxSpeed);
 
-    m_TargetVelocity = move * m_MaxSpeed;
+    Debug.Log(m_SlipDirection.ToString("F5"));
+
+    if (m_IsSlipping || move.x * m_SlipDirection.x < 0) {
+      m_TargetVelocity = Vector2.zero;
+      m_IsSlipping = true;
+    } else {
+      m_TargetVelocity = move * m_MaxSpeed;
+    }
+    
+    bool isMoveOpposite = (move.x * m_PrevMove.x <= 0);
+    if (m_IsSlipping && isMoveOpposite && m_SlipDirection == Vector2.zero) {
+      m_IsSlipping = false;
+    }
+
+    // Debug.Log(m_TargetVelocity.ToString("F5"));
+
+    m_PrevMove = move;
+
     Debug.DrawRay(gameObject.transform.position
                   , ThrowVector * m_DebugRayLength
                   , Color.white);
