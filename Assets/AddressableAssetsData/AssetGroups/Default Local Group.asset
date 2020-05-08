@@ -21,7 +21,8 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/SceneObtainableItems/CombinedItem.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_mainAssetType: 
+    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: 36cbcb6b808b2ba48a5e2a6fd592cac0
     m_Address: Assets/Sprites/Level1Sprites/Items/Item02.png
     m_ReadOnly: 0
@@ -64,6 +65,11 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: 931ee2d896bcb3f4fbeedc042122f069
+    m_Address: Assets/Prefabs/SceneObtainableItems/HiddenItem01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: bdce4a95fd2d61e4981a3e164366c908
     m_Address: Assets/Sprites/Level1Sprites/Items/Item01.png
     m_ReadOnly: 0

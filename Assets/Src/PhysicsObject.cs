@@ -26,6 +26,7 @@ public class PhysicsObject : MonoBehaviour
   protected float m_SettedGravityModifier;
 
   private bool m_ForcedMove = false;
+  private float m_SlipSpeed = 0.0f;
 
   void OnEnable() {
     m_Rb2d = GetComponent<Rigidbody2D>();
@@ -60,7 +61,7 @@ public class PhysicsObject : MonoBehaviour
 
     m_Grounded = false;
 
-    m_Rb2d.position += m_SlipDirection * m_SlipModifier * Time.fixedDeltaTime;
+    m_Rb2d.position += m_SlipDirection * m_SlipSpeed * m_SlipModifier * Time.fixedDeltaTime;
 
     var extraMoving = new List<ISceneMovable>();
 
@@ -77,10 +78,6 @@ public class PhysicsObject : MonoBehaviour
     // Debug.DrawRay(gameObject.transform.position
     //               , new Vector3(move.x, move.y, 0) * m_DebugRayLength
     //               , Color.red);
-
-    // if (m_SlipDirection != Vector2.zero) {
-    //   move = Vector2.zero;
-    // }
 
     Movement(move, false, extraMoving);
 
@@ -100,6 +97,10 @@ public class PhysicsObject : MonoBehaviour
       Landed();
     }
     m_PrevGrounded = m_Grounded;
+
+    Debug.DrawRay(gameObject.transform.position
+                  , m_Velocity * m_DebugRayLength
+                  , Color.magenta);
   }
 
   void Movement(Vector2 move, bool yMovement, List<ISceneMovable> additionalObjects) {
@@ -156,11 +157,17 @@ public class PhysicsObject : MonoBehaviour
         // When falling into some sloped surface that isn't ground, should
         // start slipping
         if (yMovement && !isHitGround && currentNormal.y > 0.01f) {
-          float rotateDegrees = currentNormal.x >= 0 ? 90.0f : 270.0f;
+          float rotateDegrees = currentNormal.x <= 0 ? 90.0f : 270.0f;
           m_SlipDirection = VectorMath.RotateV2Degree(currentNormal, rotateDegrees);
+          m_SlipSpeed += (Physics2D.gravity * m_GravityModifier * Time.fixedDeltaTime).y * -1;
         } else {
           m_SlipDirection = Vector2.zero;
+          m_SlipSpeed = 0;
         }
+
+        //Debug.Log(m_SlipDirection.ToString("F5"));
+        Debug.DrawRay(gameObject.transform.position, currentNormal, Color.green);
+        Debug.DrawRay(gameObject.transform.position, m_SlipDirection, Color.cyan);
 
         float modifiedDistance = hit.distance - m_ShellRadius;
         distance = modifiedDistance < distance ? modifiedDistance : distance;

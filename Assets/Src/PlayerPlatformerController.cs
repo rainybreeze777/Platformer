@@ -119,8 +119,6 @@ public class PlayerPlatformerController : PhysicsObject {
     // animator.SetBool("grounded", m_Grounded);
     // animator.SetFloat("velocityX", Mathf.Abs(m_Velocity.x) / m_MaxSpeed);
 
-    Debug.Log(m_SlipDirection.ToString("F5"));
-
     if (m_IsSlipping || move.x * m_SlipDirection.x < 0) {
       m_TargetVelocity = Vector2.zero;
       m_IsSlipping = true;

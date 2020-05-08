@@ -8,6 +8,8 @@ public class VectorMath {
   }
 
   public static Vector2 RotateV2Degree(Vector2 v, float degrees) {
-    return RotateV2Radian(v, degrees * Mathf.Rad2Deg);
+    Vector3 afterRotate = Quaternion.AngleAxis(degrees, Vector3.forward)
+                          * (new Vector3(v.x, v.y));
+    return new Vector2(afterRotate.x, afterRotate.y);
   }
 }
