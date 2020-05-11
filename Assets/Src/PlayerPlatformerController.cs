@@ -35,14 +35,14 @@ public class PlayerPlatformerController : PhysicsObject {
   private Vector2 m_PrevMove;
 
   private SpriteRenderer spriteRenderer;
-  private Animator m_Animator;
+  private PlayerAnimDriver m_AnimDriver;
 
   private Action m_OnForceMoveArrive;
 
   // Use this for initialization
   void Awake() {
     spriteRenderer = GetComponent<SpriteRenderer>();
-    m_Animator = GetComponent<Animator>();
+    m_AnimDriver = GetComponent<PlayerAnimDriver>();
     // Must find across-scene shared objects instead of dragging them in
     // in inspector, otherwise upon scene reload, the references go missing
     m_EventManager = GameObject.Find("/EventManager")
@@ -110,14 +110,9 @@ public class PlayerPlatformerController : PhysicsObject {
     if (move.x > 0.01f) { m_Facing = new Vector3(1, 0, 0); }
     else if (move.x < -0.01f) { m_Facing = new Vector3(-1, 0, 0); }
 
-    bool flipSprite = (spriteRenderer.flipX 
-                        ? (move.x > 0.01f) : (move.x < -0.01f));
-    if (flipSprite) {
-      spriteRenderer.flipX = !spriteRenderer.flipX;
-    }
-
     // animator.SetBool("grounded", m_Grounded);
     // animator.SetFloat("velocityX", Mathf.Abs(m_Velocity.x) / m_MaxSpeed);
+    m_AnimDriver.HorizontalVelocity = m_Velocity.x / m_MaxSpeed;
 
     if (m_IsSlipping || move.x * m_SlipDirection.x < 0) {
       m_TargetVelocity = Vector2.zero;
@@ -160,7 +155,7 @@ public class PlayerPlatformerController : PhysicsObject {
   protected override void Landed() {
     if (m_FallDist > m_FallDeathThreshold) {
       m_EventManager.Invoke<AboutToDieUEvent>();
-      m_Animator.SetTrigger("Die");
+      // m_Animator.SetTrigger("Die");
     }
     m_FallDist = 0; 
   }
