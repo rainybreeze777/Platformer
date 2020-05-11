@@ -33,7 +33,7 @@ public class PhysicsObject : MonoBehaviour
     m_SettedGravityModifier = m_GravityModifier;
   }
 
-  void Start() {
+  protected virtual void Start() {
     m_ContactFilter.useTriggers = false;
     m_ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
     m_ContactFilter.useLayerMask = true;

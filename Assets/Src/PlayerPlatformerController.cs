@@ -34,14 +34,11 @@ public class PlayerPlatformerController : PhysicsObject {
   private Vector3 m_ScriptedTargetPos;
   private Vector2 m_PrevMove;
 
-  private SpriteRenderer spriteRenderer;
   private PlayerAnimDriver m_AnimDriver;
 
   private Action m_OnForceMoveArrive;
 
-  // Use this for initialization
   void Awake() {
-    spriteRenderer = GetComponent<SpriteRenderer>();
     m_AnimDriver = GetComponent<PlayerAnimDriver>();
     // Must find across-scene shared objects instead of dragging them in
     // in inspector, otherwise upon scene reload, the references go missing
@@ -51,7 +48,11 @@ public class PlayerPlatformerController : PhysicsObject {
                                 .GetComponent<PlayerManager>() as PlayerManager;
     m_Facing = new Vector3(1, 0);
     m_PrevMove = Vector2.zero;
-    m_OriginalSortingOrder = spriteRenderer.sortingOrder;
+  }
+
+  protected override void Start() {
+    base.Start();
+    m_OriginalSortingOrder = m_AnimDriver.SortingOrder;
   }
 
   public void FlipHiddenPassageLayer(bool toHidden, int targetSortingLayer = -100) {
@@ -63,7 +64,7 @@ public class PlayerPlatformerController : PhysicsObject {
     m_ContactFilter.useTriggers = false;
     m_ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(layer));
     m_ContactFilter.useLayerMask = true;
-    spriteRenderer.sortingOrder = sortingOrder;
+    m_AnimDriver.SortingOrder = sortingOrder;
   }
 
   public void ScriptedMoveToPoint(Vector3 pos, Action onForceMoveArrive) {
@@ -110,9 +111,9 @@ public class PlayerPlatformerController : PhysicsObject {
     if (move.x > 0.01f) { m_Facing = new Vector3(1, 0, 0); }
     else if (move.x < -0.01f) { m_Facing = new Vector3(-1, 0, 0); }
 
-    // animator.SetBool("grounded", m_Grounded);
-    // animator.SetFloat("velocityX", Mathf.Abs(m_Velocity.x) / m_MaxSpeed);
+    m_AnimDriver.IsGrounded = m_Grounded;
     m_AnimDriver.HorizontalVelocity = m_Velocity.x / m_MaxSpeed;
+    m_AnimDriver.VerticalVelocity = m_Velocity.y;
 
     if (m_IsSlipping || move.x * m_SlipDirection.x < 0) {
       m_TargetVelocity = Vector2.zero;
@@ -146,6 +147,7 @@ public class PlayerPlatformerController : PhysicsObject {
       move.x = m_ScriptedTargetPos.x > m_Rb2d.position.x ? 1 : -1;
       m_TargetVelocity = move * m_MaxSpeed;
     }
+    m_AnimDriver.HorizontalVelocity = m_Velocity.x / m_MaxSpeed;
   }
 
   protected override void FallDistance(float distance) {
@@ -155,7 +157,9 @@ public class PlayerPlatformerController : PhysicsObject {
   protected override void Landed() {
     if (m_FallDist > m_FallDeathThreshold) {
       m_EventManager.Invoke<AboutToDieUEvent>();
-      // m_Animator.SetTrigger("Die");
+      m_AnimDriver.PlayerDies(() => {
+        m_EventManager.Invoke<DeadUEvent>();
+      });
     }
     m_FallDist = 0; 
   }
@@ -174,10 +178,6 @@ public class PlayerPlatformerController : PhysicsObject {
       m_Rb2d.gravityScale = 1;
       m_GravityModifier = m_SettedGravityModifier;
     }
-  }
-
-  void OnDeathAnimationFinish() {
-    m_EventManager.Invoke<DeadUEvent>();
   }
 
   bool IsDucking {
