@@ -15,6 +15,7 @@ public class PlayerAnimDriver : MonoBehaviour
   private float m_HVelocity;
   private float m_VVelocity;
 
+  private const float m_Threshold = 0.2f;
   private const string kIdleAnimName = "01Idle";
   private const string kRunAnimName = "02Run";
   private const string kDeathAnimName = "03Death";
@@ -47,7 +48,7 @@ public class PlayerAnimDriver : MonoBehaviour
     get { return m_HVelocity; }
     set {
       m_HVelocity = value;
-      if (m_HVelocity < -0.01f || m_HVelocity > 0.01f) {
+      if (m_HVelocity < -m_Threshold || m_HVelocity > m_Threshold) {
         bool flipSprite = (m_Arma.flipX ? (value > 0.01f) : (value < -0.01f));
         if (flipSprite) {
           m_Arma.flipX = !m_Arma.flipX;
@@ -69,7 +70,7 @@ public class PlayerAnimDriver : MonoBehaviour
     get { return m_VVelocity; }
     set {
       m_VVelocity = value;
-      if (!IsGrounded && m_VVelocity > 0.01f) {
+      if (!IsGrounded && m_VVelocity > m_Threshold) {
         switch (AnimState) {
           case EPlayerAnimState.Idle:
           case EPlayerAnimState.Running:
@@ -79,7 +80,7 @@ public class PlayerAnimDriver : MonoBehaviour
           default:
             break;
         }
-      } else if (!IsGrounded && m_VVelocity < -0.01f) {
+      } else if (!IsGrounded && m_VVelocity < -m_Threshold) {
         switch (AnimState) {
           case EPlayerAnimState.Idle:
           case EPlayerAnimState.Running:
@@ -132,7 +133,7 @@ public class PlayerAnimDriver : MonoBehaviour
       AnimState = EPlayerAnimState.Falling;
       m_Anim.FadeIn(kFallingAnimName, m_FadeInTime);
     } else if (animState.name.Equals(kLandingAnimName)) {
-      if (HorizontalVelocity < -0.01f || HorizontalVelocity > 0.01f) {
+      if (HorizontalVelocity < -m_Threshold || HorizontalVelocity > m_Threshold) {
         AnimState = EPlayerAnimState.Running;
         m_Anim.FadeIn(kRunAnimName, m_FadeInTime);
       } else {

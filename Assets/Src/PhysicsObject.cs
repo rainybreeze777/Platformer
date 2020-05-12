@@ -91,7 +91,6 @@ public class PhysicsObject : MonoBehaviour
     foreach (ISceneMovable movingObj in extraMoving) {
       externalVelocities += movingObj.Velocity;
     }
-    m_Velocity += externalVelocities;
     m_Rb2d.position += externalVelocities * Time.fixedDeltaTime;
 
     if (m_Grounded && !m_PrevGrounded) {
@@ -138,17 +137,21 @@ public class PhysicsObject : MonoBehaviour
           }
         }
 
-        float projection = Vector2.Dot(m_Velocity, currentNormal);
-        if ((isHitGround || currentNormal.y <= 0.01f) && projection < 0) {
-          m_Velocity = m_Velocity - projection * currentNormal;
-          Debug.DrawRay(gameObject.transform.position
-              , new Vector3(m_Velocity.x, m_Velocity.y, 0)
-              , Color.red);
-        }
-
         ISceneMovable movable = hit.transform.GetComponent<ISceneMovable>() as ISceneMovable;
         if (movable != null) {
           additionalObjects.Add(movable);
+        }
+
+        float projection = Vector2.Dot(m_Velocity, currentNormal);
+        if ((isHitGround || currentNormal.y <= 0.01f) && projection < 0) {
+          m_Velocity = m_Velocity - projection * currentNormal;
+          if (!isHitGround && movable != null) {
+            // Case where player hits the celling
+            m_Velocity += movable.Velocity;
+          }
+          Debug.DrawRay(gameObject.transform.position
+              , new Vector3(m_Velocity.x, m_Velocity.y, 0)
+              , Color.red);
         }
 
         // When falling into some sloped surface that isn't ground, should
@@ -162,11 +165,12 @@ public class PhysicsObject : MonoBehaviour
           m_SlipSpeed = 0;
         }
 
-        //Debug.Log(m_SlipDirection.ToString("F5"));
-        Debug.DrawRay(gameObject.transform.position, currentNormal, Color.green);
-        Debug.DrawRay(gameObject.transform.position, m_SlipDirection, Color.cyan);
-
         float modifiedDistance = hit.distance - m_ShellRadius;
+        if (hit.distance == 0) {
+          // Colliders overlapping?
+          ColliderDistance2D overlapDist = m_Rb2d.Distance(hit.collider);
+          modifiedDistance = Mathf.Min(modifiedDistance, overlapDist.distance);
+        }
         distance = modifiedDistance < distance ? modifiedDistance : distance;
       }
 

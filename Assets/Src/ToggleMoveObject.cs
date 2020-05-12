@@ -14,6 +14,7 @@ public class ToggleMoveObject : Toggleable, ISceneMovable {
   private Vector2 m_Pos1;
   private Vector2 m_Pos2;
   private Vector2 m_Velocity;
+  [SerializeField]
   private bool m_IsOn = false;
 
   void Start() {
@@ -30,6 +31,10 @@ public class ToggleMoveObject : Toggleable, ISceneMovable {
     Vector2 movingTowards = m_IsOn ? m_Pos2 - m_Pos1 : m_Pos1 - m_Pos2;
     m_Velocity = m_Rb2d.position == targetPos ? Vector2.zero : movingTowards.normalized * m_Speed;
     m_Rb2d.MovePosition(Vector2.MoveTowards(m_Rb2d.position, targetPos, Time.fixedDeltaTime * m_Speed));
+    // if (m_IsOn)
+    // {
+    //   Debug.Break();
+    // }
   }
 
   public override void NotifyToggleOn() {
