@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8789a0ce7ca9c34c825a35ef76c2c7e, type: 3}
+  m_Name: CofferDragonbones_Data
+  m_EditorClassIdentifier: 
+  dataName: CofferDragonbones
+  dragonBonesJSON: {fileID: 4900000, guid: 178d83c358a7b544eaf54b00e7c19fbb, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 8e8f2ceaa3c378f47b29c5239b5bd46b, type: 3}
+    texture: {fileID: 2800000, guid: 458f8f160ad3a9f49af38bb6efb220da, type: 3}
+    material: {fileID: 2100000, guid: 1cb3b3ed79458f34995f2e7f371945ba, type: 2}
+    uiMaterial: {fileID: 0}

@@ -4,18 +4,19 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(ContainerAnimDriver))]
 public class SceneObtainableItemContainer : MonoBehaviour
 {
   public AssetReference m_ContainedItemPrefab;
   public Vector2 m_ItemPopVector;
   public float m_ItemPopForce = 1.0f;
 
-  private Animator m_ContainerAnimator;
+  private ContainerAnimDriver m_AnimDriver;
   private Transform m_MainFrame;
   private bool m_ContainerOpened = false;
 
   void Start() {
-    m_ContainerAnimator = GetComponentInChildren<Animator>() as Animator;
+    m_AnimDriver = GetComponent<ContainerAnimDriver>();
     m_MainFrame = GameObject.FindWithTag("MainFrame")
                     .GetComponent<Transform>() as Transform;
   }
@@ -24,7 +25,7 @@ public class SceneObtainableItemContainer : MonoBehaviour
     if (m_ContainerOpened) { return; }
     if (collider.tag == "Player") {
       m_ContainerOpened = true;
-      m_ContainerAnimator.SetTrigger("shouldOpen");
+      m_AnimDriver.PlayOpenContainerAnim();
     }
   }
 
