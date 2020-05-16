@@ -33,8 +33,7 @@ public class UIFader : MonoBehaviour
       }
     });
     m_EventManager.AddListener<DeadUEvent>(() => {
-      m_FadeInBlackComplete.RemoveAllListeners();
-      m_FadeOutBlackComplete.RemoveAllListeners();
+      ClearAllListeners();
       m_FadeInBlackComplete.AddListener(() => {
         m_SceneLoader.RestartScene();
       });
@@ -58,6 +57,11 @@ public class UIFader : MonoBehaviour
     StartCoroutine(FadeBlackScreen(true)); 
   }
   public void FadeOutBlack() { StartCoroutine(FadeBlackScreen(false)); }
+
+  public void ClearAllListeners() {
+    m_FadeInBlackComplete.RemoveAllListeners();
+    m_FadeOutBlackComplete.RemoveAllListeners();
+  }
 
   IEnumerator FadeBlackScreen(bool inOrOut) {
     float targetAlpha = inOrOut ? 1.0f : 0.0f;

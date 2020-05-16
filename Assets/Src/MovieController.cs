@@ -7,9 +7,12 @@ using Input = Platformer.Input;
 
 public class MovieController : MonoBehaviour
 {
-  public UIFader m_Fader;
-
   private MoviePlayStatus m_PlayStatus;
+  private UIFader m_Fader;
+
+  void Start() {
+    m_Fader = GameObject.Find("/UICanvas/UIFader").GetComponent<UIFader>();
+  }
 
   public void PlayMovie(VideoPlayer vid, Action onMovieStart, Action onMovieEnd) {
     m_PlayStatus = new MoviePlayStatus(vid, m_Fader);
@@ -25,6 +28,13 @@ public class MovieController : MonoBehaviour
     vid.Prepare();
     m_Fader.FadeInBlack();
     StartCoroutine(m_PlayStatus.FadeInBlackWhenMovieAlmostEnd());
+  }
+
+  public void ResetFadeListenerThenPlayMovie(VideoPlayer vid
+                                             , Action onMovieStart
+                                             , Action onMovieEnd) {
+    m_Fader.ClearAllListeners();
+    PlayMovie(vid, onMovieStart, onMovieEnd);
   }
 
   void Update() {

@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    m_UIInventoryListener.gameObject.SetActive(false);
   }
 
   public void ShowDialogueUI() {
@@ -30,6 +31,14 @@ public class UIManager : MonoBehaviour
 
   public void HideDialogueUI() {
     m_UIDialogue.Hide();
+  }
+
+  public void ShowInventory() {
+    m_UIInventoryListener.gameObject.SetActive(true);
+  }
+
+  public void HideInventory() {
+    m_UIInventoryListener.gameObject.SetActive(false);
   }
 
   public void PopulateDialogueUI(ActorLine actorLine) {

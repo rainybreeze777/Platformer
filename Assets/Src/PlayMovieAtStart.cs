@@ -11,6 +11,7 @@ public class PlayMovieAtStart : MonoBehaviour
   public AudioManager m_AudioManager;
 
   private SceneLoader m_SceneLoader;
+  private UIManager m_UIManager;
 
   // Start is called before the first frame update
   void Start()
@@ -20,8 +21,10 @@ public class PlayMovieAtStart : MonoBehaviour
     // avoiding initialization order problems.
     m_SceneLoader = GameObject.Find("/SceneLoader")
                               .GetComponent<SceneLoader>() as SceneLoader;
+    m_UIManager = GameObject.Find("/UICanvas").GetComponent<UIManager>();
     if (!m_SceneLoader.IsReloadedScene) {
       m_MovieController.PlayMovie(m_StartMovie, null, () => {
+        m_UIManager.ShowInventory();
         m_AudioManager.PlayBgm(true, true);
       });
     }
