@@ -7,11 +7,13 @@ using Input = Platformer.Input;
 
 public class MovieController : MonoBehaviour
 {
+  public string m_FaderPath;
+
   private MoviePlayStatus m_PlayStatus;
   private UIFader m_Fader;
 
   void Start() {
-    m_Fader = GameObject.Find("/UICanvas/UIFader").GetComponent<UIFader>();
+    m_Fader = GameObject.Find(m_FaderPath).GetComponent<UIFader>();
   }
 
   public void PlayMovie(VideoPlayer vid, Action onMovieStart, Action onMovieEnd) {

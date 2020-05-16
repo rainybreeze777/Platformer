@@ -3766,6 +3766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521fa8799dab52f49a81dc3c7b15ee26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FaderPath: /UICanvas/UIFader
 --- !u!4 &544692597
 Transform:
   m_ObjectHideFlags: 0
