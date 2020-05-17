@@ -13,11 +13,16 @@ public class UILandingPage : MonoBehaviour
   public GameObject m_StartMenu;
 
   private bool m_UIEnabled = false;
+  private AudioSource m_MenuLoopMusic;
 
   // Start is called before the first frame update
   void Start()
   {
-    m_MovieController.PlayMovie(m_Opening, null, EnableAllUI);
+    m_MenuLoopMusic = GetComponent<AudioSource>();
+    m_MovieController.PlayMovie(m_Opening, null, () => {
+      EnableAllUI();
+      m_MenuLoopMusic.Play();
+    });
   }
   
   private void EnableAllUI() {
