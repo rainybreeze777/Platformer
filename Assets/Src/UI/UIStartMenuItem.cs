@@ -22,11 +22,6 @@ public class UIStartMenuItem : MonoBehaviour, IPointerClickHandler
           m_EventManager.Invoke<TransitionNextSceneUEvent>();
         });
         break;
-      case MenuButton.Continue:
-        m_Fader.m_FadeInBlackComplete.AddListener(() => {
-          m_EventManager.Invoke<TransitionNextSceneUEvent>();
-        });
-        break;
       case MenuButton.Exit:
         m_Fader.m_FadeInBlackComplete.AddListener(() => { Application.Quit(); });
         break;
@@ -35,6 +30,6 @@ public class UIStartMenuItem : MonoBehaviour, IPointerClickHandler
   }
 
   public enum MenuButton {
-    Start, Continue, Exit
+    Start, Exit
   }
 }
