@@ -5,8 +5,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class UIImage : MonoBehaviour, IPointerClickHandler
+public class UIImage : MonoBehaviour
+                       , IPointerClickHandler
+                       , IPointerEnterHandler
+                       , IPointerExitHandler
 {
+  public GameObject m_ItemHighlight;
+
   private string m_ItemId;
   private PlayerManager m_PlayerManager;
 
@@ -22,5 +27,13 @@ public class UIImage : MonoBehaviour, IPointerClickHandler
 
   public void OnPointerClick(PointerEventData pointerEventData) {
     m_PlayerManager.DropItemById(m_ItemId);
+  }
+
+  public void OnPointerEnter(PointerEventData pointerEventData) {
+    m_ItemHighlight.SetActive(true);
+  }
+
+  public void OnPointerExit(PointerEventData pointerEventData) {
+    m_ItemHighlight.SetActive(false);
   }
 }

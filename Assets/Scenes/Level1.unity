@@ -6676,7 +6676,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 699655260139062088, guid: 52ea67b837b382247bc709c651fc1606,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862561119835508119, guid: 52ea67b837b382247bc709c651fc1606,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6247939270728807345, guid: 52ea67b837b382247bc709c651fc1606, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 52ea67b837b382247bc709c651fc1606, type: 3}
 --- !u!1 &816158721
 GameObject:

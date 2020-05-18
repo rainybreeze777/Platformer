@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
   [SerializeField] private UIInventoryListener m_UIInventoryListener;
+  [SerializeField] private GameObject m_UIInventoryLabel;
   [SerializeField] private UIDialogue m_UIDialogue;
 
   private static UIManager s_Instance;
@@ -35,10 +36,12 @@ public class UIManager : MonoBehaviour
 
   public void ShowInventory() {
     m_UIInventoryListener.gameObject.SetActive(true);
+    m_UIInventoryLabel.SetActive(true);
   }
 
   public void HideInventory() {
     m_UIInventoryListener.gameObject.SetActive(false);
+    m_UIInventoryLabel.SetActive(false);
   }
 
   public void PopulateDialogueUI(ActorLine actorLine) {
