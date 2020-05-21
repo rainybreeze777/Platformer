@@ -14,7 +14,7 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   private bool m_IsLocked = true;
   private bool m_IsOn = false;
   private bool m_IsPlayerInRange = false;
-  private Animator m_Animator;
+  private SwitchAnimDriver m_AnimDriver;
   
   private List<string> m_UnlockNeededItemIds;
 
@@ -22,7 +22,7 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   void Start() {
     m_PlayerManager = GameObject.Find("/PlayerManager")
                            .GetComponent<PlayerManager>() as PlayerManager;
-    m_Animator = GetComponent<Animator>();
+    m_AnimDriver = GetComponent<SwitchAnimDriver>();
     m_UnlockNeededItemIds = new List<string>();
     foreach (var item in m_UnlockItems) {
       m_UnlockNeededItemIds.Add(item.ItemId);
@@ -72,26 +72,20 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
 
   public void Unlock() {
     m_IsLocked = false;
-    if (m_Animator != null) {
-      m_Animator.SetBool("isUnlocked", true);
-    }
+    m_AnimDriver.PlayUnlockSwitch();
   }
 
   private void TurnOn() {
     foreach (var target in m_ToggleTargets) {
       target.NotifyToggleOn();
     }
-    if (m_Animator != null) {
-      m_Animator.SetBool("pulled", true);
-    }
+    m_AnimDriver.PlayTurnOnSwitch();
   }
 
   private void TurnOff() {
     foreach (var target in m_ToggleTargets) {
       target.NotifyToggleOff();
     }
-    if (m_Animator != null) {
-      m_Animator.SetBool("pulled", false);
-    }
+    m_AnimDriver.PlayTurnOffSwitch();
   }
 }

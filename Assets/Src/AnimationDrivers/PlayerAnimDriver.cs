@@ -4,14 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DragonBones;
 
-public class PlayerAnimDriver : MonoBehaviour
+[RequireComponent(typeof(PlayerPlatformerController))]
+public class PlayerAnimDriver : AnimDriver
 {
-  public float m_FadeInTime = 0.2f;
-
-  private UnityArmatureComponent m_UAC;
-  private DragonBones.Animation m_Anim;
-  private DragonBones.Armature m_Arma;
-
   private float m_HVelocity;
   private float m_VVelocity;
 
@@ -32,13 +27,8 @@ public class PlayerAnimDriver : MonoBehaviour
   }
 
   // Start is called before the first frame update
-  void Start() {
-    m_UAC = GetComponentInChildren<UnityArmatureComponent>();
-    m_Anim = m_UAC.animation;
-    m_Arma = m_UAC.armature;
-
-    m_UAC.AddDBEventListener(EventObject.COMPLETE, OnAnimationComplete);
-
+  public override void Start() {
+    base.Start();
     m_Anim.Play(kIdleAnimName);
   }
 
@@ -124,7 +114,7 @@ public class PlayerAnimDriver : MonoBehaviour
     Idle, Running, StartJump, JumpingUp, JumpToFall, Falling, Landing, Death
   }
 
-  private void OnAnimationComplete(string type, EventObject evObj) {
+  protected override void OnAnimationComplete(string type, EventObject evObj) {
     DragonBones.AnimationState animState = evObj.animationState;
     if (animState.name.Equals(kStartJumpAnimName)) {
       AnimState = EPlayerAnimState.JumpingUp;
