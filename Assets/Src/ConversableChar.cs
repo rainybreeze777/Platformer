@@ -11,6 +11,7 @@ public class ConversableChar : MonoBehaviour
   public string m_CharacterTag;
   public bool m_HasQuest;
   public List<SceneObtainableItem> m_NeededQuestItems;
+  public ShowTipWhenInZone m_ShowTip;
 
   private TextManager m_TextManager;
   private PlayerManager m_PlayerManager;
@@ -54,6 +55,7 @@ public class ConversableChar : MonoBehaviour
       } else if (Input.GetButtonDown("Action")) {
         EConversationType convoType = m_CSM.AdvanceState();
         StartCoroutine(EngageInConversation(m_CharacterTag, convoType));
+        m_ShowTip?.ForceStopShowTips();
       }
     }
   }
