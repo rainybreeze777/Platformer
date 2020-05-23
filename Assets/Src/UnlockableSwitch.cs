@@ -10,6 +10,7 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   public bool m_AutoReset = false;
   public float m_AutoResetWaitTime = 0;
   public List<Toggleable> m_ToggleTargets;
+  public ShowTipWhenInZone m_ShowTip;
   private PlayerManager m_PlayerManager;
   private bool m_IsLocked = true;
   private bool m_IsOn = false;
@@ -33,6 +34,7 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   void Update() {
     if (!m_IsLocked) {
       if (m_IsPlayerInRange && Input.GetButtonDown("Action")) {
+        m_ShowTip?.ForceStopShowTips();
         if (!m_IsOn) {
           m_IsOn = true;
           TurnOn();

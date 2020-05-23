@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8789a0ce7ca9c34c825a35ef76c2c7e, type: 3}
-  m_Name: Stage1Switch_Data
+  m_Name: Character02_Data
   m_EditorClassIdentifier: 
-  dataName: Stage1Switch
-  dragonBonesJSON: {fileID: 4900000, guid: 2a59400c04915d948a88a7d13775faf8, type: 3}
+  dataName: Character02
+  dragonBonesJSON: {fileID: 4900000, guid: 366ef3dc1e6c57244bac29671925b87f, type: 3}
   textureAtlas:
-  - textureAtlasJSON: {fileID: 4900000, guid: 3c347b543898811499b47ae432728e3a, type: 3}
-    texture: {fileID: 2800000, guid: 816dc9b3f80f45b4c97a29e3367e70ac, type: 3}
-    material: {fileID: 2100000, guid: d68168ac1b0aff343bed692a45098a57, type: 2}
+  - textureAtlasJSON: {fileID: 4900000, guid: cddab965706dcbb4580e6dd8111ffa65, type: 3}
+    texture: {fileID: 2800000, guid: a4a5fdc73d20a8e4c8b32298835e81d7, type: 3}
+    material: {fileID: 2100000, guid: 7c8b887686ba12a448d37fddea0a9a02, type: 2}
     uiMaterial: {fileID: 0}

@@ -25,7 +25,7 @@ public class SwitchAnimDriver : AnimDriver
   public void PlayUnlockSwitch() {
     if (m_State == ESwitchAnimState.Locked) {
       m_State = ESwitchAnimState.Off;
-      m_Anim.FadeIn(kSwitchOff, m_FadeInTime, 1);
+      m_Anim.GotoAndPlayByProgress(kSwitchOff, 100.0f, 1);
     } else {
       PrintInvalidStateAnimCall(kSwitchOff, m_State);
     }
