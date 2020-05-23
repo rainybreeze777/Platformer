@@ -618,7 +618,7 @@ PrefabInstance:
     - target: {fileID: 7849617633049222144, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03999996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7849617633049222144, guid: c4280470b41f1d84cbf532bae6ad2593,
         type: 3}
@@ -4148,7 +4148,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ShowTip
       value: 
-      objectReference: {fileID: 1096808011}
+      objectReference: {fileID: 0}
     - target: {fileID: 9035316585632422489, guid: b53fab3e39aa0e44a996b4b806a555a3,
         type: 3}
       propertyPath: m_NeededQuestItems.Array.data[2]
@@ -7354,6 +7354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _sortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215062044644634056, guid: 065528e7be760b2459c5a362c2fb2f2a,
+        type: 3}
+      propertyPath: _flipX
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3146804957938149739, guid: 065528e7be760b2459c5a362c2fb2f2a,
         type: 3}
@@ -11405,7 +11410,7 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.98039216, g: 0.972549, b: 0.9411765, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.9
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 9577b4750000000031228c30
@@ -11599,7 +11604,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1096808009}
   - component: {fileID: 1096808012}
-  - component: {fileID: 1096808011}
   - component: {fileID: 1096808010}
   m_Layer: 0
   m_Name: Char02PressZTip
@@ -11636,46 +11640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FadeInTime: 0.2
---- !u!114 &1096808011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096808008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81157e8668332c841aaf3347f9097ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTipFuncion:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1096808010}
-        m_MethodName: PlayLoop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  StopShowTipFunction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1096808010}
-        m_MethodName: StopLoop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &1096808012
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12064,12 +12028,12 @@ PrefabInstance:
     - target: {fileID: 860587728206417552, guid: a83143800b977714a888917200755ac7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.38
+      value: 29.126
       objectReference: {fileID: 0}
     - target: {fileID: 860587728206417552, guid: a83143800b977714a888917200755ac7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.21
+      value: 3.07
       objectReference: {fileID: 0}
     - target: {fileID: 860587728206417552, guid: a83143800b977714a888917200755ac7,
         type: 3}
@@ -12116,6 +12080,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 860587728206417552, guid: a83143800b977714a888917200755ac7,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 860587728206417552, guid: a83143800b977714a888917200755ac7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 860587728206417552, guid: a83143800b977714a888917200755ac7,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a83143800b977714a888917200755ac7, type: 3}
 --- !u!4 &1207375605 stripped
@@ -12134,7 +12113,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1235124522}
   - component: {fileID: 1235124523}
-  - component: {fileID: 1235124524}
   - component: {fileID: 1235124525}
   m_Layer: 0
   m_Name: SwitchPressZTip
@@ -12184,46 +12162,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2409897, y: 2.53448}
   m_EdgeRadius: 0
---- !u!114 &1235124524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235124521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81157e8668332c841aaf3347f9097ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTipFuncion:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1235124525}
-        m_MethodName: PlayLoop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  StopShowTipFunction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1235124525}
-        m_MethodName: StopLoop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1235124525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12979,7 +12917,7 @@ PrefabInstance:
     - target: {fileID: 8152331840512888761, guid: 5fd17e25dfd6f4644bbd5800a41ccf32,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.831
+      value: 17.69
       objectReference: {fileID: 0}
     - target: {fileID: 8152331840512888761, guid: 5fd17e25dfd6f4644bbd5800a41ccf32,
         type: 3}
@@ -13025,6 +12963,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152331840512888761, guid: 5fd17e25dfd6f4644bbd5800a41ccf32,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152331840512888761, guid: 5fd17e25dfd6f4644bbd5800a41ccf32,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152331840512888761, guid: 5fd17e25dfd6f4644bbd5800a41ccf32,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fd17e25dfd6f4644bbd5800a41ccf32, type: 3}
@@ -15256,7 +15209,7 @@ MonoBehaviour:
   m_ToggleTargets:
   - {fileID: 1327605014}
   m_LockedDialogueLineTag: MissingCombineItem
-  m_ShowTip: {fileID: 1235124524}
+  m_ShowTip: {fileID: 0}
 --- !u!61 &1649050232
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15413,12 +15366,12 @@ PrefabInstance:
     - target: {fileID: 5010261836359202386, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08
+      value: 0.658
       objectReference: {fileID: 0}
     - target: {fileID: 5010261836359202386, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.02
+      value: 7.905
       objectReference: {fileID: 0}
     - target: {fileID: 5010261836359202386, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
