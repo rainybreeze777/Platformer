@@ -27,7 +27,8 @@ MonoBehaviour:
     m_Address: Assets/TextData/Level1.json
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_mainAssetType: 
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: 36cbcb6b808b2ba48a5e2a6fd592cac0
     m_Address: Assets/Sprites/Level1Sprites/Items/Item02.png
     m_ReadOnly: 0
@@ -46,6 +47,11 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: 5fd17e25dfd6f4644bbd5800a41ccf32
+    m_Address: Assets/Prefabs/SceneObtainableItems/HiddenItem03.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: 733f1fc97afe7464fb6f08d07bfc34a5
     m_Address: Assets/Prefabs/SceneObtainableItems/Item02.prefab
     m_ReadOnly: 0
@@ -76,6 +82,16 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: 94aafb7ba7f27244ba5f3c8570aef1c4
+    m_Address: Assets/Sprites/Level1Sprites/Items/HiddenItem03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
+  - m_GUID: a83143800b977714a888917200755ac7
+    m_Address: Assets/Prefabs/SceneObtainableItems/HiddenItem02.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: bdce4a95fd2d61e4981a3e164366c908
     m_Address: Assets/Sprites/Level1Sprites/Items/Item01.png
     m_ReadOnly: 0
@@ -100,12 +116,22 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: eb6e1b433a3014f4aa35db7035f64dcc
+    m_Address: Assets/Sprites/Level1Sprites/Items/HiddenItem01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   - m_GUID: f4686ba5212383148bde8c287abf7452
     m_Address: Assets/Sprites/Level1Sprites/Items/CombinedItems.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: fa060085b2c307a47b5a134dbc1a785d
+    m_Address: Assets/Sprites/Level1Sprites/Items/HiddenItem02.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7c5c64230a21c05548da17842848f653, type: 2}
   m_SchemaSet:

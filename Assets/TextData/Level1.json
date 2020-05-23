@@ -78,6 +78,16 @@
         "Speaker": "Narrator",
         "Text": "All five parts seem to fit together, and they combined"
       }
+    ],
+    "MissingCombineItem": [
+      {
+        "Speaker": "Player",
+        "Text": "嗯？机关毫无动静……"
+      },
+      {
+        "Speaker": "Player",
+        "Text": "这机关中间似乎缺了一块，可能放进这块零件才能驱动机关。"
+      }
     ]
   }
 }

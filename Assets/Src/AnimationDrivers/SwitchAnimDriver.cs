@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DragonBones;
@@ -12,6 +13,9 @@ public class SwitchAnimDriver : AnimDriver
   private const string kSwitchOnRepeat = "SwitchOnRepeat";
 
   private ESwitchAnimState m_State;
+
+  private Action m_OnTurnOnAnimFinish;
+  private Action m_OnTurnOffAnimFinish;
 
   private void Awake() {
     m_State = ESwitchAnimState.Locked;
@@ -31,18 +35,20 @@ public class SwitchAnimDriver : AnimDriver
     }
   }
 
-  public void PlayTurnOnSwitch() {
+  public void PlayTurnOnSwitch(Action onTurnOnAnimFinish) {
     if (m_State == ESwitchAnimState.Off) {
       m_State = ESwitchAnimState.On;
+      m_OnTurnOnAnimFinish = onTurnOnAnimFinish;
       m_Anim.FadeIn(kSwitchOn, m_FadeInTime, 1);
     } else {
       PrintInvalidStateAnimCall(kSwitchOn, m_State);
     }
   }
 
-  public void PlayTurnOffSwitch() {
+  public void PlayTurnOffSwitch(Action onTurnOffAnimFinish) {
     if (m_State == ESwitchAnimState.On) {
       m_State = ESwitchAnimState.Off;
+      m_OnTurnOffAnimFinish = onTurnOffAnimFinish;
       m_Anim.FadeIn(kSwitchOff, m_FadeInTime, 1);
     } else {
       PrintInvalidStateAnimCall(kSwitchOff, m_State);
@@ -58,7 +64,12 @@ public class SwitchAnimDriver : AnimDriver
   protected override void OnAnimationComplete(string type, EventObject evObj) {
     DragonBones.AnimationState animState = evObj.animationState;
     if (animState.name.Equals(kSwitchOn)) {
+      m_OnTurnOnAnimFinish?.Invoke();
       m_Anim.FadeIn(kSwitchOnRepeat, m_FadeInTime);
+      m_OnTurnOnAnimFinish = null;
+    } else if (animState.name.Equals(kSwitchOff)) {
+      m_OnTurnOffAnimFinish?.Invoke();
+      m_OnTurnOffAnimFinish = null;
     }
   }
 

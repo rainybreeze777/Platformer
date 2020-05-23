@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5654671077334268098
+--- !u!1001 &3795091950491826667
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,38 +10,33 @@ PrefabInstance:
     - target: {fileID: 5010261836359202390, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_Name
-      value: HiddenItem02
+      value: HiddenItem03
       objectReference: {fileID: 0}
     - target: {fileID: 5010261836359202391, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_PrefabAssetPath
-      value: Assets/Prefabs/SceneObtainableItems/HiddenItem02.prefab
+      value: Assets/Prefabs/SceneObtainableItems/HiddenItem03.prefab
       objectReference: {fileID: 0}
     - target: {fileID: 5010261836359202391, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_ItemName
-      value: HiddenItem 2
+      value: HiddenItem 3
       objectReference: {fileID: 0}
     - target: {fileID: 5010261836359202391, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_ItemId
-      value: hiddenItem02
+      value: hiddenItem03
       objectReference: {fileID: 0}
-    - target: {fileID: 5010261836359202391, guid: 931ee2d896bcb3f4fbeedc042122f069,
-        type: 3}
-      propertyPath: m_SceneObtainablePrefab
-      value: 
-      objectReference: {fileID: 860587728206417557}
     - target: {fileID: 5010261836359202391, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_ItemSprite
       value: 
-      objectReference: {fileID: 21300000, guid: fa060085b2c307a47b5a134dbc1a785d,
+      objectReference: {fileID: 21300000, guid: 94aafb7ba7f27244ba5f3c8570aef1c4,
         type: 3}
     - target: {fileID: 5010261836359202391, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
       propertyPath: m_ItemSpriteAssetPath
-      value: Assets/Sprites/Level1Sprites/Items/HiddenItem02.png
+      value: Assets/Sprites/Level1Sprites/Items/HiddenItem03.png
       objectReference: {fileID: 0}
     - target: {fileID: 5010261836359202386, guid: 931ee2d896bcb3f4fbeedc042122f069,
         type: 3}
@@ -102,19 +97,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fa060085b2c307a47b5a134dbc1a785d,
+      objectReference: {fileID: 21300000, guid: 94aafb7ba7f27244ba5f3c8570aef1c4,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 931ee2d896bcb3f4fbeedc042122f069, type: 3}
---- !u!114 &860587728206417557 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5010261836359202391, guid: 931ee2d896bcb3f4fbeedc042122f069,
-    type: 3}
-  m_PrefabInstance: {fileID: 5654671077334268098}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa40f19d3125fa19cbd00cf255682d59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

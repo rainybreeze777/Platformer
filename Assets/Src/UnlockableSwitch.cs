@@ -10,11 +10,16 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   public bool m_AutoReset = false;
   public float m_AutoResetWaitTime = 0;
   public List<Toggleable> m_ToggleTargets;
+  public string m_LockedDialogueLineTag = "MissingCombineItem";
   public ShowTipWhenInZone m_ShowTip;
   private PlayerManager m_PlayerManager;
+  private TextManager m_TextManager;
+  private UIManager m_UIManager;
   private bool m_IsLocked = true;
   private bool m_IsOn = false;
   private bool m_IsPlayerInRange = false;
+  private bool m_IsEngagedInConvo = false;
+  private bool m_GetNextLine = false;
   private SwitchAnimDriver m_AnimDriver;
   
   private List<string> m_UnlockNeededItemIds;
@@ -23,6 +28,8 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   void Start() {
     m_PlayerManager = GameObject.Find("/PlayerManager")
                            .GetComponent<PlayerManager>() as PlayerManager;
+    m_TextManager = GameObject.Find("/TextManager").GetComponent<TextManager>();
+    m_UIManager = GameObject.Find("/UICanvas").GetComponent<UIManager>();
     m_AnimDriver = GetComponent<SwitchAnimDriver>();
     m_UnlockNeededItemIds = new List<string>();
     foreach (var item in m_UnlockItems) {
@@ -32,8 +39,11 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
 
   // Update is called once per frame
   void Update() {
-    if (!m_IsLocked) {
-      if (m_IsPlayerInRange && Input.GetButtonDown("Action")) {
+    if (m_IsEngagedInConvo && Input.GetActionButtonDownIgnoreAllowInput()) {
+      m_GetNextLine = true;
+    }
+    if (m_IsPlayerInRange && Input.GetButtonDown("Action")) {
+      if (!m_IsLocked) {
         m_ShowTip?.ForceStopShowTips();
         if (!m_IsOn) {
           m_IsOn = true;
@@ -42,6 +52,9 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
           m_IsOn = false;
           TurnOff();
         }
+      } else if (!m_IsEngagedInConvo 
+                 && !string.IsNullOrEmpty(m_LockedDialogueLineTag)) {
+        StartCoroutine(DisplayLockedDialogue());
       }
     }
   }
@@ -78,16 +91,37 @@ public class UnlockableSwitch : MonoBehaviour, IUnlockable {
   }
 
   private void TurnOn() {
-    foreach (var target in m_ToggleTargets) {
-      target.NotifyToggleOn();
-    }
-    m_AnimDriver.PlayTurnOnSwitch();
+    m_AnimDriver.PlayTurnOnSwitch(() => {
+      foreach (var target in m_ToggleTargets) {
+        target.NotifyToggleOn();
+      }
+    });
   }
 
   private void TurnOff() {
-    foreach (var target in m_ToggleTargets) {
-      target.NotifyToggleOff();
+    m_AnimDriver.PlayTurnOffSwitch(() => {
+      foreach (var target in m_ToggleTargets) {
+        target.NotifyToggleOff();
+      }
+    });
+  }
+
+  private IEnumerator DisplayLockedDialogue() {
+    m_IsEngagedInConvo = true;
+    Input.AllowInput = false;
+    m_UIManager.ShowDialogueUI();
+    int linesCount = m_TextManager
+                      .GetNumberOfTriggerLines(m_LockedDialogueLineTag);
+    for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex)
+    {
+      ActorLine line =
+        m_TextManager.GetTriggerLine(m_LockedDialogueLineTag, lineIndex);
+      m_UIManager.PopulateDialogueUI(line);
+      yield return new WaitUntil(() => m_GetNextLine);
+      m_GetNextLine = false;
     }
-    m_AnimDriver.PlayTurnOffSwitch();
+    m_UIManager.HideDialogueUI();
+    Input.AllowInput = true;
+    m_IsEngagedInConvo = false;
   }
 }
