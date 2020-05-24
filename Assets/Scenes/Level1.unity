@@ -16064,7 +16064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 1
   m_LocalPos1: {x: 23.15, y: 25.903}
-  m_LocalPos2: {x: 23.15, y: 24.05}
+  m_LocalPos2: {x: 23.15, y: 22.53}
   m_IsOn: 0
 --- !u!61 &1733912237
 BoxCollider2D:

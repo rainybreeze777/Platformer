@@ -74,7 +74,6 @@ public class HiddenUnlockable : MonoBehaviour, IUnlockable
         foreach (var inRangeItem in m_CurrentInRangeItems) {
           if (inRangeItem.ItemId == unlockId) {
             m_CurrentInRangeItems.Remove(inRangeItem);
-            Destroy(inRangeItem.gameObject);
             break;
           }
         }
