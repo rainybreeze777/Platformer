@@ -2164,6 +2164,7 @@ MonoBehaviour:
   m_CharacterTag: 
   m_HasQuest: 0
   m_NeededQuestItems: []
+  m_ShowTip: {fileID: 0}
 --- !u!114 &7270065517016742712
 MonoBehaviour:
   m_ObjectHideFlags: 0

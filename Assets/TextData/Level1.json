@@ -2,17 +2,17 @@
   "Actors": [
     {
       "Tag": "Narrator",
-      "Name": "",
+      "Name": "旁  白",
       "Sprite": ""
     },
     {
       "Tag": "Player",
-      "Name": "Player1",
+      "Name": "宁  山",
       "Sprite": ""
     },
     {
       "Tag": "NPC1",
-      "Name": "N.P.C 1",
+      "Name": "？？？",
       "Sprite": ""
     }
   ],
@@ -21,53 +21,149 @@
       "FirstEncounter" : [
         {
           "Speaker": "NPC1",
-          "Text": "What is your name?"
+          "Text": "！"
         },
         {
           "Speaker": "Player",
-          "Text": "I am the Player."
-        },
-        {
-          "Speaker": "NPC1",
-          "Text": "What is your purpose?"
+          "Text": "！！（惊）"
         },
         {
           "Speaker": "Player",
-          "Text": "To find the holy grail."
+          "Text": "你是谁！？"
         },
         {
           "Speaker": "NPC1",
-          "Text": "What is your favorite color?"
+          "Text": "你又是谁？"
         },
         {
           "Speaker": "Player",
-          "Text": "Blue!"
+          "Text": "！"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "你就是山神吗？"
         },
         {
           "Speaker": "NPC1",
-          "Text": "I'm sure that's not your favorite color. To make up to me, you will need to find all three hidden items."
+          "Text": "哈？我怎么会是那个老家伙？"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "你们认识！？"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "你可以带我去见他吗？我是被他指引到此的。"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "普通人来这干什么？给他当替死鬼吗？"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "什么？！"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "他让你来这帮忙，怎么什么都没跟你说？"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "帮忙？难道发生了什么事吗？"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "你不知——（突然捂住自己的嘴）"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "不知道不知道（上下打量）"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "我只知道以你目前的实力就算真走到他的家门口也见不着他。"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "我走了。（转身）"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "喂！停下！我都说了,以你的实力肯定是见不到他的！"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "（停下脚步）"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "你还不如现在帮我个忙，从附近给我搜集几个小玩意？"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "我凭什么信你，又为什么要帮你？"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "不然，等你把那【三个】小玩意给我带回来，我就给你点好东西怎么样？"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "……"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "能救命的好东西。"
+        },
+        {
+          "Speaker": "Player",
+          "Text": "……"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "没记错的话……有两块在树后面，一块在最顶端。只不过顶端那块好像需要前两块，然后还得扔在高台上做点什么疯疯癫癫的事情……"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "哎呀，我给忘了，也许你跳个舞就行？"
+        },
+        {
+          "Speaker": "Narrator",
+          "Text": "【提示：已接受任务】"
         }
       ],
       "QuestInstructionRepeat": [
         {
           "Speaker": "NPC1",
-          "Text": "Find all three hidden items, then I'll consider let you proceed."
+          "Text": "记得他们藏在大树后面……这最后一块需要把前两块扔高台上。"
+        },
+        {
+          "Speaker": "NPC1",
+          "Text": "但是接下来要干什么……？跳……跳……跳舞？跳大神？"
         }
       ],
       "QuestComplete": [
         {
+          "Speaker": "NPC1",
+          "Text": "没错，就是他们！"
+        },
+        {
           "Speaker": "Player",
-          "Text": "All three hidden items as promised."
+          "Text": "……"
         },
         {
           "Speaker": "NPC1",
-          "Text": "Very well. You may now cross to find the holy grail."
+          "Text": "好了，这个给你，希望你能赶上吧。"
+        },
+        {
+          "Speaker": "Narrator",
+          "Text": "【任务完成，获得：神秘纹样护身符x1】"
         }
       ],
       "DefaultRepeat": [
         {
           "Speaker": "NPC1",
-          "Text": "Good day to you."
+          "Text": "快去找山神吧！"
         }
       ]
     }
@@ -76,7 +172,7 @@
     "CombineItems": [
       {
         "Speaker": "Narrator",
-        "Text": "All five parts seem to fit together, and they combined"
+        "Text": "五块物件像是受到了彼此的吸引，竟然自己合成了一块零件。"
       }
     ],
     "MissingCombineItem": [
