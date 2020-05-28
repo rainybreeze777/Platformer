@@ -130,6 +130,10 @@
         {
           "Speaker": "Narrator",
           "Text": "【提示：已接受任务】"
+        },
+		{
+          "Speaker": "NPC1",
+          "Text": "哦......对了，你要是找到第三块了，可别急着马上回来，那地方除了傻子没什么人会直接从那跳下去。"
         }
       ],
       "QuestInstructionRepeat": [
@@ -140,6 +144,10 @@
         {
           "Speaker": "NPC1",
           "Text": "但是接下来要干什么……？跳……跳……跳舞？跳大神？"
+        },
+		{
+          "Speaker": "NPC1",
+          "Text": "第三块在非常高的地方，从那不小心掉下去你可就没了。"
         }
       ],
       "QuestComplete": [
