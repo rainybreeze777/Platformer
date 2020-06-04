@@ -7,22 +7,17 @@ using Input = Platformer.Input;
 
 public class UILandingPage : MonoBehaviour
 {
-  public MovieController m_MovieController;
-  public VideoPlayer m_Opening;
-
   public GameObject m_StartMenu;
+  public UIFader m_Fader;
 
-  private bool m_UIEnabled = false;
+  private bool m_UIEnabled = true;
   private AudioSource m_MenuLoopMusic;
 
   // Start is called before the first frame update
   void Start()
   {
     m_MenuLoopMusic = GetComponent<AudioSource>();
-    m_MovieController.PlayMovie(m_Opening, null, () => {
-      EnableAllUI();
-      m_MenuLoopMusic.Play();
-    });
+    m_Fader.FadeOutBlack();
   }
   
   private void EnableAllUI() {
